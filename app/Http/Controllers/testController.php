@@ -25,7 +25,7 @@ class testController extends BaseController
 	$ProductTotalTNSaleAmount=3000;
 	$ProductTotalAmount=4000;
 	
-	$path= createInvoiceCode('AB11223344','1020523','9999','324','340','00000000','01234567',$ProductArrays);
+	$path= createInvoiceCode('AB11223344','1020523','9999','324','340','00000000',$ProductArrays);
 	$barcode=$path['barcode'];
 	$qr1=$path['qr1'];
 	$qr2=$path['qr2'];
