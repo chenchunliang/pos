@@ -63,7 +63,10 @@ function aseEncrypt($data){
 	return base64_encode(openssl_encrypt($data,$method, $AESkey,OPENSSL_RAW_DATA, $iv));
 }
 
-function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmount,$TotalAmount,$BuyerIdentifier,$SellerIdentifier,$ProductArrays){
+							//發票號碼		發票日期		隨機碼			銷售額			總計		買方統編				商品資訊
+function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmount,$TotalAmount,$BuyerIdentifier,$ProductArrays){
+	
+	$SellerIdentifier="55891836";
 	
 	$codepath=array('barcode'=>'','qr1'=>'','qr2'=>'');
 	
