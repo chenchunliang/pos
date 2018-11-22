@@ -5,4 +5,4 @@ php artisan make:migration create_position_table --create
 php artisan make:migration create_customer_table --create
 php artisan make:migration create_invoice_table --create
 php artisan make:migration create_salesinvoice_table --create
-php artisan make:migration create_invalidinvoice _table --create
+php artisan make:migration create_invalidinvoice_table --create
