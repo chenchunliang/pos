@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class testController extends BaseController
 {
     function index(){
-	$ProductSumAmount=123;
+	$ProductSumAmount=33333;
 	$ProductArrays=array(
 	array("ProductCode"=>"00001","ProductName"=>"黑豆","ProductQty"=>"1","ProductSaleAmount"=>"171","ProductTaxAmount"=>"9","ProductAmount"=>"180","ProductSumAmount"=>$ProductSumAmount,"TaxType"=>"TN"),
 	array("ProductCode"=>"00001","ProductName"=>"黑豆2","ProductQty"=>"1","ProductSaleAmount"=>"171","ProductTaxAmount"=>"9","ProductAmount"=>"180","ProductSumAmount"=>$ProductSumAmount,"TaxType"=>"TN"),
