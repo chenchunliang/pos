@@ -14,7 +14,10 @@ class CreateCatalogTable extends Migration
     public function up()
     {
         Schema::create('catalog', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('catalog_id');
+			$table->string('catalog_name');
+			$table->integer('catalog_orders');
+			$table->integer('catalog_display');
             $table->timestamps();
         });
     }

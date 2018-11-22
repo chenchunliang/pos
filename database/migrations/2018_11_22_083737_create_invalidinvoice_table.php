@@ -14,7 +14,14 @@ class CreateInvalidinvoiceTable extends Migration
     public function up()
     {
         Schema::create('invalidinvoice', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('invalidinvoice_id');
+			$table->date('invalidinvoice_invaliddate');
+			$table->time('invalidinvoice_invalidtime');
+			$table->string('invalidinvoice_invalidreason');
+			
+			$table->unsignedInteger('salesinvoice_id');
+			$table->foreign('salesinvoice_id')->references('salesinvoice_id')->on('salesinvoice');
+			
             $table->timestamps();
         });
     }
