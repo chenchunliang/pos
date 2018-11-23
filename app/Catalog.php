@@ -9,6 +9,11 @@ class Catalog extends Model
 {
     //
 	protected $dates = ['deleted_at'];
+	protected $fillable = [
+		'catalog_name',
+		'catalog_orders',
+		'catalog_display',
+	];
 	
 	public function position(){
 		return $this->hasMany('App\Position');

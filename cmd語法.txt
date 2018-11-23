@@ -26,3 +26,14 @@ php artisan make:controller CustomerController --resource
 php artisan make:controller InvoiceController --resource
 php artisan make:controller SalesinvoiceController --resource
 php artisan make:controller InvalidinvoiceController --resource
+
+php artisan make:seeder ParameterTableSeeder
+php artisan make:seeder ItemTableSeeder
+php artisan make:seeder CatalogTableSeeder
+php artisan make:seeder PositionTableSeeder
+php artisan make:seeder CustomerTableSeeder
+php artisan make:seeder InvoiceTableSeeder
+php artisan make:seeder SalesinvoiceTableSeeder
+php artisan make:seeder InvalidinvoiceTableSeeder
+
+php artisan migrate:refresh --seed
