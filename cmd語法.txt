@@ -1,8 +1,28 @@
-php artisan make:migration create_parameter_table --create
-php artisan make:migration create_item_table --create
-php artisan make:migration create_catalog_table --create
-php artisan make:migration create_position_table --create
-php artisan make:migration create_customer_table --create
-php artisan make:migration create_invoice_table --create
-php artisan make:migration create_salesinvoice_table --create
-php artisan make:migration create_invalidinvoice_table --create
+php artisan make:migration create_parameters_table --create
+php artisan make:migration create_items_table --create
+php artisan make:migration create_catalogs_table --create
+php artisan make:migration create_positions_table --create
+php artisan make:migration create_customers_table --create
+php artisan make:migration create_invoices_table --create
+php artisan make:migration create_salesinvoices_table --create
+php artisan make:migration create_invalidinvoices_table --create
+
+php artisan migrate
+
+php artisan make:model Parameter
+php artisan make:model Item
+php artisan make:model Catalog
+php artisan make:model Position
+php artisan make:model Customer
+php artisan make:model Invoice
+php artisan make:model Salesinvoice
+php artisan make:model Invalidinvoice
+
+php artisan make:controller ParameterController --resource
+php artisan make:controller ItemController --resource
+php artisan make:controller CatalogController --resource
+php artisan make:controller PositionController --resource
+php artisan make:controller CustomerController --resource
+php artisan make:controller InvoiceController --resource
+php artisan make:controller SalesinvoiceController --resource
+php artisan make:controller InvalidinvoiceController --resource

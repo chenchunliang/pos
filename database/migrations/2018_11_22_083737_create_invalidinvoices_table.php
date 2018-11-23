@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvalidinvoiceTable extends Migration
+class CreateInvalidinvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateInvalidinvoiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('invalidinvoice', function (Blueprint $table) {
-            $table->increments('invalidinvoice_id');
+        Schema::create('invalidinvoices', function (Blueprint $table) {
+            $table->increments('id');
 			$table->date('invalidinvoice_invaliddate');
 			$table->time('invalidinvoice_invalidtime');
 			$table->string('invalidinvoice_invalidreason');
 			
 			$table->unsignedInteger('salesinvoice_id');
-			$table->foreign('salesinvoice_id')->references('salesinvoice_id')->on('salesinvoice');
+			$table->foreign('salesinvoice_id')->references('id')->on('salesinvoices');
 			
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 
@@ -33,6 +34,6 @@ class CreateInvalidinvoiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invalidinvoice');
+        Schema::dropIfExists('invalidinvoices');
     }
 }
