@@ -10,4 +10,12 @@ class Parameter extends Model
     //
 	
 	protected $dates = ['deleted_at'];
+	
+	protected $fillable = [
+		'parameter_code',
+		'parameter_title',
+		'parameter_value',
+		'parameter_groups',
+	];
+	
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 use App\Parameter;
 
 class ParameterController extends Controller
@@ -15,6 +18,8 @@ class ParameterController extends Controller
     public function index()
     {
         //
+		$Parameters=Parameter::all();
+		return view('parameter.index',compact('Parameters'));
     }
 
     /**
@@ -25,6 +30,7 @@ class ParameterController extends Controller
     public function create()
     {
         //
+		return view('parameter.create');
     }
 
     /**
@@ -36,6 +42,17 @@ class ParameterController extends Controller
     public function store(Request $request)
     {
         //
+		$validated=$request->validate([
+			'parameter_code'=>'required',
+			'parameter_title'=>'required',
+			'parameter_value'=>'required',
+			'parameter_groups'=>'required',
+		]);
+		
+		Parameter::create($validated);
+		
+		return redirect('parameter');
+		
     }
 
     /**
@@ -46,7 +63,8 @@ class ParameterController extends Controller
      */
     public function show($id)
     {
-        //
+        //目前沒用到
+		return $Parameters=Parameter::find($id);
     }
 
     /**
@@ -58,6 +76,8 @@ class ParameterController extends Controller
     public function edit($id)
     {
         //
+		$Parameter=Parameter::find($id);
+		return view('parameter.edit',compact('Parameter'));
     }
 
     /**
@@ -70,6 +90,17 @@ class ParameterController extends Controller
     public function update(Request $request, $id)
     {
         //
+		$validated=$request->validate([
+			'parameter_code'=>'required',
+			'parameter_title'=>'required',
+			'parameter_value'=>'required',
+			'parameter_groups'=>'required',
+		]);
+
+		Parameter::find($id)->update($validated);
+		
+		return redirect('parameter');
+		
     }
 
     /**
@@ -81,5 +112,12 @@ class ParameterController extends Controller
     public function destroy($id)
     {
         //
+		try {
+			Parameter::find($id)->delete();
+			return redirect('parameter');
+		}
+		catch(\Exception $exception){
+			return redirect('parameter')->withErrors(['delete_error'=>'此資料已存在其他表單中，不可刪除!']);
+		}
     }
 }
