@@ -9,6 +9,11 @@ class Customer extends Model
 {
     //
 	protected $dates = ['deleted_at'];
+	protected $fillable = [
+		'customer_name',
+		'customer_identifier',
+		'customer_remark',
+	];
 	
 	public function salesinvoice(){
 		return $this->hasMany('App\Salesinvoice');
