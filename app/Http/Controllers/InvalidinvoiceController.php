@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Invalidinvoice;
 
 class InvalidinvoiceController extends Controller
 {
@@ -14,6 +15,9 @@ class InvalidinvoiceController extends Controller
     public function index()
     {
         //
+		$invalidinvoice = Invalidinvoice::find(1);
+
+		echo $invalidinvoice;
     }
 
     /**

@@ -14,15 +14,15 @@ class CreatepositionsTable extends Migration
     public function up()
     {
         Schema::create('positions', function (Blueprint $table) {
-            $table->increments('positions_id');
-			$table->integer('positions_x');
-			$table->integer('positions_y');
+            $table->increments('id');
+			$table->integer('position_x');
+			$table->integer('position_y');
 			
-			$table->unsignedInteger('items_id');
-			$table->unsignedInteger('catalogs_id');
+			$table->unsignedInteger('item_id');
+			$table->unsignedInteger('catalog_id');
 			
-			$table->foreign('items_id')->references('items_id')->on('items');
-			$table->foreign('catalogs_id')->references('catalogs_id')->on('catalogs');
+			$table->foreign('item_id')->references('id')->on('items');
+			$table->foreign('catalog_id')->references('id')->on('catalogs');
             $table->timestamps();
 			$table->softDeletes();
 			

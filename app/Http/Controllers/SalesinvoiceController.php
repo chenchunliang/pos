@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Salesinvoice;
 
 class SalesinvoiceController extends Controller
 {
@@ -14,6 +15,10 @@ class SalesinvoiceController extends Controller
     public function index()
     {
         //
+		$salesinvoice = Salesinvoice::find(1);
+
+		echo $salesinvoice->customer;
+		
     }
 
     /**

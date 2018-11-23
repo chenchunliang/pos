@@ -9,6 +9,5 @@ class Parameter extends Model
 {
     //
 	
-	protected $primaryKey="parameters_id";
 	protected $dates = ['deleted_at'];
 }

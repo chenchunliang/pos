@@ -14,11 +14,11 @@ class CreateparametersTable extends Migration
     public function up()
     {
         Schema::create('parameters', function (Blueprint $table) {
-            $table->increments('parameters_id');
-			$table->string('parameters_code');
-			$table->string('parameters_title');
-			$table->string('parameters_value');
-			$table->string('parameters_groups');
+            $table->increments('id');
+			$table->string('parameter_code');
+			$table->string('parameter_title');
+			$table->string('parameter_value');
+			$table->string('parameter_groups');
             $table->timestamps();
 			$table->softDeletes();
         });

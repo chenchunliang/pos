@@ -14,13 +14,13 @@ class CreateinvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->increments('invoices_id');
-			$table->string('invoices_startmonth');
-			$table->string('invoices_endmonth');
-			$table->string('invoices_wordtrack');
-			$table->string('invoices_startnumber');
-			$table->string('invoices_endnumber');
-			$table->string('invoices_currentnumber');
+            $table->increments('id');
+			$table->string('invoice_startmonth');
+			$table->string('invoice_endmonth');
+			$table->string('invoice_wordtrack');
+			$table->string('invoice_startnumber');
+			$table->string('invoice_endnumber');
+			$table->string('invoice_currentnumber');
             $table->timestamps();
 			$table->softDeletes();
         });

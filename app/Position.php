@@ -9,6 +9,15 @@ class Position extends Model
 {
     //
 	
-	protected $primaryKey="positions_id";
 	protected $dates = ['deleted_at'];
+	
+	
+	public function item(){
+		return $this->belongsTo('App\Item');
+	}
+	
+	public function catalog(){
+		return $this->belongsTo('App\Catalog');
+	}
+		
 }

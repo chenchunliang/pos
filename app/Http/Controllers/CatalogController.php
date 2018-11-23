@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Catalog;
 
 class CatalogController extends Controller
 {
@@ -14,6 +15,9 @@ class CatalogController extends Controller
     public function index()
     {
         //
+		$Catalog = Catalog::find(1);
+
+		echo $Catalog->position;
     }
 
     /**

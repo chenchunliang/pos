@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     //
-	
-	protected $primaryKey="customers_id";
 	protected $dates = ['deleted_at'];
+	
+	public function salesinvoice(){
+		return $this->hasMany('App\Salesinvoice');
+	}
 }

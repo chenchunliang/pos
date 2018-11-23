@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Position;
 
 class PositionController extends Controller
 {
@@ -14,6 +15,11 @@ class PositionController extends Controller
     public function index()
     {
         //
+		$position = Position::find(1);
+
+		echo $position;
+
+		 
     }
 
     /**

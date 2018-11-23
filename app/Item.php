@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Item extends Model
 {
     //
-	
-	protected $primaryKey="items_id";
 	protected $dates = ['deleted_at'];
+	
+	public function position(){
+		return $this->hasMany('App\Position');
+	}
 }

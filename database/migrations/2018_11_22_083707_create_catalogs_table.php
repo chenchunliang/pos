@@ -14,10 +14,10 @@ class CreatecatalogsTable extends Migration
     public function up()
     {
         Schema::create('catalogs', function (Blueprint $table) {
-            $table->increments('catalogs_id');
-			$table->string('catalogs_name');
-			$table->integer('catalogs_orders');
-			$table->integer('catalogs_display');
+            $table->increments('id');
+			$table->string('catalog_name');
+			$table->integer('catalog_orders');
+			$table->integer('catalog_display');
             $table->timestamps();
 			$table->softDeletes();
         });

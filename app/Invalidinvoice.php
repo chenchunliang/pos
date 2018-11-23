@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Invalidinvoice extends Model
 {
     //
-	
-	protected $primaryKey="invalidinvoices_id";
 	protected $dates = ['deleted_at'];
+	
+	public function salesinvoice(){
+		return $this->belongsTo('App\Salesinvoice');
+	}
 }

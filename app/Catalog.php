@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Catalog extends Model
 {
     //
-	
-	
-	protected $primaryKey="catalogs_id";
 	protected $dates = ['deleted_at'];
 	
+	public function position(){
+		return $this->hasMany('App\Position');
+	}
 }
