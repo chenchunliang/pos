@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParameterTable extends Migration
+class CreatecustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateParameterTable extends Migration
      */
     public function up()
     {
-        Schema::create('parameter', function (Blueprint $table) {
-            $table->increments('parameter_id');
-			$table->string('parameter_code');
-			$table->string('parameter_title');
-			$table->string('parameter_value');
-			$table->string('parameter_groups');
+        Schema::create('customers', function (Blueprint $table) {
+            $table->increments('customers_id');
+			$table->string('customers_name');
+			$table->string('customers_identifier');
+			$table->string('customers_remark');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateParameterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parameter');
+        Schema::dropIfExists('customers');
     }
 }

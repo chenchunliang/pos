@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatalogTable extends Migration
+class CreateparametersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCatalogTable extends Migration
      */
     public function up()
     {
-        Schema::create('catalog', function (Blueprint $table) {
-            $table->increments('catalog_id');
-			$table->string('catalog_name');
-			$table->integer('catalog_orders');
-			$table->integer('catalog_display');
+        Schema::create('parameters', function (Blueprint $table) {
+            $table->increments('parameters_id');
+			$table->string('parameters_code');
+			$table->string('parameters_title');
+			$table->string('parameters_value');
+			$table->string('parameters_groups');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCatalogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catalog');
+        Schema::dropIfExists('parameters');
     }
 }
