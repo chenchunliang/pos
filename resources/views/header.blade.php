@@ -17,12 +17,21 @@
     <!-- MetisMenu CSS -->
     {{ HTML::style('vendor/metisMenu/metisMenu.min.css')}}
 
+	<!-- DataTables CSS -->
+	{{ HTML::style('vendor/datatables-plugins/dataTables.bootstrap.css')}}
+
+    <!-- DataTables Responsive CSS -->
+    {{ HTML::style('vendor/datatables-responsive/dataTables.responsive.css')}}
+    
     <!-- Custom CSS -->
     {{ HTML::style('dist/css/sb-admin-2.css')}}
-
+    
     <!-- Custom Fonts -->
     {{ HTML::style('vendor/font-awesome/css/font-awesome.min.css')}}
-
+    
+    <!-- Custom Fonts -->
+    {{ HTML::style('css/my.css')}}
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
