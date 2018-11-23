@@ -17,3 +17,12 @@ Route::get('/', function () {
 
 
 Route::get('/test', 'testController@index');
+
+Route::resource('parameter', 'ParameterController');
+Route::resource('item', 'ItemController');
+Route::resource('catalog', 'CatalogController');
+Route::resource('position', 'PositionController');
+Route::resource('customer', 'CustomerController');
+Route::resource('invoice', 'InvoiceController');
+Route::resource('salesinvoice', 'SalesinvoiceController');
+Route::resource('invalidinvoice', 'InvalidinvoiceController');
