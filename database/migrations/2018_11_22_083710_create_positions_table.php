@@ -24,6 +24,7 @@ class CreatepositionsTable extends Migration
 			$table->foreign('items_id')->references('items_id')->on('items');
 			$table->foreign('catalogs_id')->references('catalogs_id')->on('catalogs');
             $table->timestamps();
+			$table->softDeletes();
 			
         });
 		

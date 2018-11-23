@@ -20,6 +20,7 @@ class CreateparametersTable extends Migration
 			$table->string('parameters_value');
 			$table->string('parameters_groups');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

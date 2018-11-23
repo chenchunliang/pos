@@ -19,6 +19,7 @@ class CreatecatalogsTable extends Migration
 			$table->integer('catalogs_orders');
 			$table->integer('catalogs_display');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

@@ -35,6 +35,7 @@ class CreatesalesinvoicesTable extends Migration
 			$table->foreign('customers_id')->references('customers_id')->on('customers');
 			
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

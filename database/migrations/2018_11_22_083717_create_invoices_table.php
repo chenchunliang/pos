@@ -22,6 +22,7 @@ class CreateinvoicesTable extends Migration
 			$table->string('invoices_endnumber');
 			$table->string('invoices_currentnumber');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

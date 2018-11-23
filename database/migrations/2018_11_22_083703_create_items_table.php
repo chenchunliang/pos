@@ -22,6 +22,7 @@ class CreateitemsTable extends Migration
 			$table->integer('items_taxtype');
 			$table->text('items_image');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

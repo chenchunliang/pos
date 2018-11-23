@@ -23,6 +23,7 @@ class CreateInvalidinvoicesTable extends Migration
 			$table->foreign('salesinvoices_id')->references('salesinvoices_id')->on('salesinvoices');
 			
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreatecustomersTable extends Migration
 			$table->string('customers_identifier');
 			$table->string('customers_remark');
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 
