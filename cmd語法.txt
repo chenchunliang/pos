@@ -6,6 +6,7 @@ php artisan make:migration create_customers_table --create
 php artisan make:migration create_invoices_table --create
 php artisan make:migration create_salesinvoices_table --create
 php artisan make:migration create_invalidinvoices_table --create
+php artisan make:migration create_users_table --create
 
 php artisan migrate
 
@@ -35,5 +36,6 @@ php artisan make:seeder CustomerTableSeeder
 php artisan make:seeder InvoiceTableSeeder
 php artisan make:seeder SalesinvoiceTableSeeder
 php artisan make:seeder InvalidinvoiceTableSeeder
+php artisan make:seeder UserTableSeeder
 
 php artisan migrate:refresh --seed

@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
+Route::get('/', 'IndexController@index');
+Route::get('/index', 'IndexController@index');
+Route::post('/login', 'IndexController@login');
+Route::get('/menu', 'IndexController@menu');
 
-Route::get('/test', 'testController@index');
+Route::get('/test', 'testController@index');//QRcode
 
 Route::resource('parameter', 'ParameterController');
 Route::resource('item', 'ItemController');

@@ -19,7 +19,9 @@ class ParameterController extends Controller
     {
         //
 		$Parameters=Parameter::all();
-		return view('parameter.index',compact('Parameters'));
+		$ParametersDistinct=Parameter::select('parameter_groups')->distinct()->get();
+		//dd($ParametersDistinct);
+		return view('parameter.index',compact('Parameters','ParametersDistinct'));
     }
 
     /**
@@ -30,7 +32,8 @@ class ParameterController extends Controller
     public function create()
     {
         //
-		return view('parameter.create');
+		$ParametersDistinct=Parameter::select('parameter_groups')->distinct()->get();
+		return view('parameter.create',compact('ParametersDistinct'));
     }
 
     /**
@@ -77,7 +80,8 @@ class ParameterController extends Controller
     {
         //
 		$Parameter=Parameter::find($id);
-		return view('parameter.edit',compact('Parameter'));
+		$ParametersDistinct=Parameter::select('parameter_groups')->distinct()->get();
+		return view('parameter.edit',compact('Parameter','ParametersDistinct'));
     }
 
     /**

@@ -14,6 +14,14 @@
     </thead>
     <tbody>
       <tr>
+        <th>參數群組</th>
+        <td align="center"><input type="text" class="datafield form-control" list="parameter_groups" name="parameter_groups" value="{{old('parameter_groups')}}">
+          @if($errors->has('parameter_groups'))
+          <p style="color:red">請至少輸入1個字元</p>
+          @endif
+          </td>
+      </tr>
+      <tr>
         <th>參數代號</th>
         <td align="center"><input type="text" class="datafield form-control" name="parameter_code" value="{{old('parameter_code')}}">
           @if($errors->has('parameter_code'))
@@ -37,14 +45,6 @@
           @endif
           </td>
       </tr>
-      <tr>
-        <th>參數群組</th>
-        <td align="center"><input type="text" class="datafield form-control" name="parameter_groups" value="{{old('parameter_groups')}}">
-          @if($errors->has('parameter_groups'))
-          <p style="color:red">請至少輸入1個字元</p>
-          @endif
-          </td>
-      </tr>
     </tbody>
   </table>
   <p>&nbsp;</p>
@@ -55,3 +55,8 @@
 <p>&nbsp;</p>
 @endsection
 
+<datalist id="parameter_groups">
+@foreach($ParametersDistinct as $parameterdistinct)
+<option>{{$parameterdistinct->parameter_groups}}</option>
+@endforeach
+</datalist>

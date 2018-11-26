@@ -23,6 +23,7 @@
 </div>
 @include('footer') 
 <script>
+var table1;
 var opt={
 	   "oLanguage":{"sUrl":"{{url('js/else/dataTables.zh-tw.txt') }}"},
        "bJQueryUI":true,
@@ -31,8 +32,8 @@ var opt={
 	   "responsive": true
    };
 $(document).ready(function(){
-   
-	$("#table1").dataTable(opt);
+
+	table1=$("#table1").dataTable(opt);
 	
 	@if($errors->first('delete_error'))
 		alert("{{$errors->first('delete_error')}}");
