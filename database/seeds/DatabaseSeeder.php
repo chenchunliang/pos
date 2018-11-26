@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(PositionTableSeeder::class);
 		$this->call(SalesinvoiceTableSeeder::class);
 		$this->call(InvalidinvoiceTableSeeder::class);
+		$this->call(UserTableSeeder::class);
 		
     }
 }
