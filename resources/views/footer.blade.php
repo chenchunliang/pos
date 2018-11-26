@@ -1,4 +1,5 @@
-
+</div>
+    <!-- /#wrapper -->
     <!-- jQuery -->
 	{{ HTML::script('vendor/jquery/jquery.min.js')}}
 

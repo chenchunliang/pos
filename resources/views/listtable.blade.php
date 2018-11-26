@@ -1,10 +1,19 @@
 @include('header')
-<div style="padding:0% 5% 0% 5%">
-  <div class="section-title text-center">
-    <h2>@yield('h2_title')</h2>
-  </div>
-  <p>&nbsp;</p>
-  <h3 align="center" style="color:#000">@yield('h3_title')</h3>
+
+ <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@yield('h2_title')</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            
+            <h3 align="center" style="color:#000">@yield('h3_title')</h3>
   
   <p align="center">@yield('createbtn')@show </p>
     <div class="row">
@@ -20,7 +29,8 @@
       </div>
     </div>
   </div>
-</div>
+  <!-- /#page-wrapper -->
+
 @include('footer') 
 <script>
 var table1;
