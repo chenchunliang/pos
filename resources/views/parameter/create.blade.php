@@ -47,12 +47,10 @@
       </tr>
     </tbody>
   </table>
-  <p>&nbsp;</p>
   <p style="text-align:center">
     <input type="submit" name="submit" class="btn btn-lg" value="儲存">
   </p>
 </form>
-<p>&nbsp;</p>
 @endsection
 
 <datalist id="parameter_groups">
