@@ -1,8 +1,8 @@
 @extends('commontable')
 
-@section('h2_title','參數設定')
+@section('h2_title','貨品設定')
 
-@section('h3_title','新增參數')
+@section('h3_title','新增貨品')
 
 @section('commontable')
 <form id="form1" name="form1" method="post" action="{{url('parameter')}}">

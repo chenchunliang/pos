@@ -52,6 +52,7 @@
 </table>
 @endsection
 
+@section('customjs')
 <script>
 function filter(object){
 	if(object){
@@ -63,3 +64,4 @@ function filter(object){
 	}
 }
 </script>
+@endsection
