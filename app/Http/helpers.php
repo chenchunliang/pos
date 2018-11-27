@@ -29,6 +29,11 @@ function barcodeGenerator($data){
 	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "C39",1,1).'" width="100%" height="24" />';
 }
 
+function item_barcodeGenerator($data){
+	$barcode = new DNS1D();
+	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "EAN13",1,1).'" width="140px" height="50px" />';
+}
+
 function qrcodeGenerator($data){
 	$qrcode = new DNS2D();
 	return '<img src="data:image/png;base64,'.$qrcode->getBarcodePNG($data,"QRCODE").'" width="70%" />';
