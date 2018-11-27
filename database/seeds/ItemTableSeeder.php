@@ -15,11 +15,11 @@ class ItemTableSeeder extends Seeder
         //
 		$item = new Item;
 		
-		$item->item_name =str_random(10);
-		$item->item_specification =str_random(10);
+		$item->item_name ="米";
+		$item->item_specification ="1.5KG";
 		$item->item_barcode =rand(10000000,99999999);
-		$item->item_unit="個";
-		$item->item_taxtype =rand(1,2);
+		$item->item_unit="包";
+		$item->item_taxtype ="1";
 		$item->item_image=base64_encode(str_random(20));
 
         $item->save();
