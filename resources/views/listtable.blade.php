@@ -15,7 +15,7 @@
             
             <h3 align="center" style="color:#000">@yield('h3_title')</h3>
   
-  <p align="center">@yield('createbtn')@show </p>
+  <p align="center">@yield('createbtn')@show</p>
     <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
@@ -53,3 +53,5 @@ $(document).ready(function(){
 	@endif
 });
 </script> 
+
+@yield('customjs')@show
