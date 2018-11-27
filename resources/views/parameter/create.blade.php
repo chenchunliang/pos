@@ -51,10 +51,11 @@
     <input type="submit" name="submit" class="btn btn-lg" value="儲存">
   </p>
 </form>
-@endsection
 
 <datalist id="parameter_groups">
 @foreach($ParametersDistinct as $parameterdistinct)
 <option>{{$parameterdistinct->parameter_groups}}</option>
 @endforeach
 </datalist>
+
+@endsection
