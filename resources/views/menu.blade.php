@@ -74,7 +74,7 @@
                   <div class="panel-body">
                     <p>編輯銷貨發票資料</p>
                   </div>
-                  <a href="{{url('parameter')}}">
+                  <a href="{{url('sales_invoice')}}">
                   <div class="panel-footer">前往</div>
                   </a> </div>
               </div>
