@@ -41,7 +41,7 @@ var opt={
 	   "order": [],
 	   "responsive": true
    };
-$(document).ready(function(){
+$(function() {
 	table1=$("#table1").dataTable(opt);
 	
 	
