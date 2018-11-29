@@ -15,9 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
-		$Customer = Customer::find(1);
-
-		echo $Customer->salesinvoice;
+		$Customers=Customer::all();
+		return view('customer.index',compact('Customers'));
     }
 
     /**
@@ -28,6 +27,7 @@ class CustomerController extends Controller
     public function create()
     {
         //
+		return view('customer.create');
     }
 
     /**
@@ -39,6 +39,15 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+		$validated=$request->validate([
+			'customer_name'=>'required',
+			'customer_identifier'=>'nullable',
+			'customer_remark'=>'nullable'
+		]);
+		
+		Customer::create($validated);
+		
+		return redirect('customer');
     }
 
     /**
@@ -61,6 +70,8 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
+		$Customer=Customer::find($id);
+		return view('customer.edit',compact('Customer'));
     }
 
     /**
@@ -73,6 +84,15 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         //
+		$Customer=Customer::find($id);
+		$validated=$request->validate([
+			'customer_name'=>'required',
+			'customer_identifier'=>'nullable',
+			'customer_remark'=>'nullable'
+		]);
+		$Customer->update($validated);
+		
+		return redirect('customer');
     }
 
     /**
@@ -84,5 +104,12 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+		try {
+			Customer::find($id)->delete();
+			return redirect('customer');
+		}
+		catch(\Exception $exception){
+			return redirect('customer')->withErrors(['delete_error'=>'此資料已存在其他表單中，不可刪除!']);
+		}
     }
 }

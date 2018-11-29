@@ -16,8 +16,8 @@ class InvoiceTableSeeder extends Seeder
 		
 		$invoice = new Invoice;
 		
-		$invoice->invoice_startmonth ="201811";
-		$invoice->invoice_endmonth ="201812";
+		$invoice->invoice_startmonth ="10711";
+		$invoice->invoice_endmonth ="10712";
 		$invoice->invoice_wordtrack ="AA";
 		$invoice->invoice_startnumber="11111100";
 		$invoice->invoice_endnumber ="11111199";

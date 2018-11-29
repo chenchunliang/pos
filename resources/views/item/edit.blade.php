@@ -8,7 +8,7 @@
 <form id="form1" name="form1" method="post" action="{{url('item/'.$Item->id)}}">
   {{csrf_field()}}
   {{method_field('PUT')}}
-  <table width="100%" class="table table-striped table-bordered table-hover" id="table1">
+  <table width="100%" class="table table-striped table-bordered table-hover">
     <thead>
     	<th style="width:30%">項目</th>
       	<th style="width:70%">內容</th>
