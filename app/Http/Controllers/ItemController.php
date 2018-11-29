@@ -28,6 +28,7 @@ class ItemController extends Controller
     public function create()
     {
         //
+		return view('item.create');
     }
 
     /**
@@ -39,6 +40,18 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+		$validated=$request->validate([
+			'item_name'=>'required',
+			'item_specification'=>'required',
+			'item_barcode'=>'required',
+			'item_unit'=>'required',
+			'item_taxtype'=>'required|min:1|max:2',
+			'item_image'=>'required',
+		]);
+		
+		Item::create($validated);
+		
+		return redirect('item');
     }
 
     /**
@@ -49,7 +62,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        //目前沒用到
+		return $Item=Item::find($id);
     }
 
     /**
@@ -61,6 +75,8 @@ class ItemController extends Controller
     public function edit($id)
     {
         //
+		$Item=Item::find($id);
+		return view('item.edit',compact('Item'));
     }
 
     /**
@@ -73,6 +89,19 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         //
+		$Item=Item::find($id);
+		$validated=$request->validate([
+			'item_name'=>'required',
+			'item_specification'=>'required',
+			'item_barcode'=>'required',
+			'item_unit'=>'required',
+			'item_taxtype'=>'required|min:1|max:2',
+			'item_image'=>'required',
+		]);
+		
+		$Item->update($validated);
+		
+		return redirect('item');
     }
 
     /**
@@ -84,5 +113,12 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+		try {
+			Item::find($id)->delete();
+			return redirect('item');
+		}
+		catch(\Exception $exception){
+			return redirect('item')->withErrors(['delete_error'=>'此資料已存在其他表單中，不可刪除!']);
+		}
     }
 }

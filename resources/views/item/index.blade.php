@@ -28,8 +28,8 @@
     <td>{{ $item->item_specification }}</td>
     <td>{{ $item->item_barcode }}<br>{!!item_barcodeGenerator($item->item_barcode)!!}</td>
     <td>{{ $item->item_unit }}</td>
-    <td>{{ $item->item_taxtype }}</td>
-    <td><img src='{{ $item->item_image }}'></td>
+    <td>{{ $item->item_taxtype==1?'免稅':'應稅內含' }}</td>
+    <td><img src='{{ $item->item_image }}' width="100"></td>
     <th> <a href="{{url('item/'.$item->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('item/'.$item->id)}}" method="post" id="item_delete_{{$item->id}}" class="deletebtn_form">
         {{csrf_field()}}

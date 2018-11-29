@@ -1,5 +1,5 @@
 // JavaScript Document
-$(document).ready(function(){
+$(function(){
 	$('.deletebtn').click(function() {
 		//console.log('你確定刪除此項目?');
 		var ans =confirm("你確定刪除此項目?");

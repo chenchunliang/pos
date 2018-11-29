@@ -20,7 +20,7 @@ class CreateitemsTable extends Migration
 			$table->string('item_barcode');
 			$table->string('item_unit');
 			$table->integer('item_taxtype');
-			$table->text('item_image');
+			$table->longText('item_image');
             $table->timestamps();
 			$table->softDeletes();
         });
