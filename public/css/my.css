@@ -46,3 +46,6 @@ input[type="file"] {
 .deletebtn_form{
 	display: inline-block;
 }
+.product_detail{
+	margin:4px 0px;
+}
