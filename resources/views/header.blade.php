@@ -99,7 +99,7 @@
                             <a href="{{url('sales')}}"><i class="fa fa-dashboard fa-fw"></i>櫃台作業</a>
                         </li>
                         <li>
-                            <a href="{{url('sales_invoice')}}"><i class="fa fa-dashboard fa-fw"></i>銷貨發票管理</a>
+                            <a href="{{url('salesinvoice')}}"><i class="fa fa-dashboard fa-fw"></i>銷貨發票管理</a>
                         </li>
                         <li>
                             <a href="{{url('invoice')}}"><i class="fa fa-dashboard fa-fw"></i>發票配號檔</a>
