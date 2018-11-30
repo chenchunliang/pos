@@ -4,7 +4,7 @@
     <thead>
       <tr>
         <th>品項</th>
-        <th >數量</th>
+        <th>數量</th>
         <th>單價</th>
       </tr>
     </thead>
