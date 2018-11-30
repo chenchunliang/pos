@@ -25,5 +25,9 @@ Route::resource('catalog', 'CatalogController');
 Route::resource('position', 'PositionController');
 Route::resource('customer', 'CustomerController');
 Route::resource('invoice', 'InvoiceController');
+
+//ajax 一定要比resource('salesinvoice')還要前面
+Route::get('/salesinvoice/display_detail/{id}', 'SalesinvoiceController@display_detail');
+
 Route::resource('salesinvoice', 'SalesinvoiceController');
 Route::resource('invalidinvoice', 'InvalidinvoiceController');
