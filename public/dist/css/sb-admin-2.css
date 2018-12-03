@@ -17,7 +17,7 @@ body {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 250px;
+    margin: 0 0 0 165px;
     padding: 0 30px;
     border-left: 1px solid #e7e7e7;
   }
@@ -103,7 +103,7 @@ body {
   .sidebar {
     z-index: 1;
     position: absolute;
-    width: 250px;
+    width: 165px;
     margin-top: 51px;
   }
   .navbar-top-links .dropdown-messages,
@@ -278,6 +278,21 @@ table.dataTable thead .sorting:after {
 }
 .panel-yellow > a:hover {
   color: #df8a13;
+}
+
+.panel-blue {
+  border-color: #0a9fce;
+}
+.panel-blue > .panel-heading {
+  border-color: #43acce;
+  color: white;
+  background-color: #59cef3;
+}
+.panel-blue > a {
+  color: #6b94b7;
+}
+.panel-blue > a:hover {
+  color: #1780da;
 }
 .timeline {
   position: relative;
