@@ -38,6 +38,28 @@
           @endif
           </td>
       </tr>
+      
+      @php
+      	$i=1;
+      @endphp
+      
+      @foreach($Parameters as $Parameter)   
+      
+      @php
+      	$item_unitprice='item_unitprice'.$i;
+      @endphp
+      <tr>
+        <th>售價{{$text[$i]}} ({{$Parameter->parameter_value?$Parameter->parameter_value:"未定義"}})</th>
+        <td align="center"><input type="number" class="form-control" name="item_unitprice{{$i}}" value='{{$Item->$item_unitprice}}'>
+          @if($errors->has('item_unitprice'.$i))
+          <p style="color:red">請輸入價格</p>
+          @endif
+        </td>
+      </tr>
+      
+     @php $i++; @endphp
+     @endforeach
+     
       <tr>
         <th>品項單位</th>
         <td align="center"><input type="text" class="form-control" name="item_unit" value="{{$Item->item_unit}}">
@@ -50,10 +72,10 @@
         <th>品項稅別</th>
         <td align="center">
           <label>
-            <input type="radio" name="item_taxtype" id="item_taxtype_1" value="1">
+            <input type="radio" name="item_taxtype" id="item_taxtype_1" value="1" @if($Item->item_taxtype=='1') checked @endif>
             免稅</label>&nbsp;&nbsp;
           <label>
-            <input type="radio" name="item_taxtype" id="item_taxtype_2" value="2">
+            <input type="radio" name="item_taxtype" id="item_taxtype_2" value="2" @if($Item->item_taxtype=='2') checked @endif>
             應稅內含</label>
           @if($errors->has('item_taxtype'))
           <p style="color:red">請至少選擇1個項目</p>
@@ -65,7 +87,7 @@
         <td align="center">
         <p>已上傳：</p>
         <img src="{!!$Item->item_image!!}">
-        <p>建議大小：100px*100px</p>
+        <p>建議大小：55px*55px</p>
         <label for="input_img" class="form-control" style="width:200px"> <i class="fa fa-cloud-upload"></i>&nbsp;選擇新照片</label>
         <input id="input_img" type="file" accept="image/*">
           @if($errors->has('item_image'))
@@ -101,16 +123,5 @@ $("#input_img").change(function(){
 	//console.log('item_img change');
 	readFile($(this));
 });
-setTimeout(a,300);
-setTimeout(a,1000);
-function a(){	
-	@if($Item->item_taxtype=='1')
-	$('#item_taxtype_1').prop('checked',true);
-	$('#item_taxtype_2').prop('checked',false);
-	@elseif(old('item_taxtype')=='2')
-	$('#item_taxtype_1').prop('checked',false);
-	$('#item_taxtype_2').prop('checked',true);
-	@endif
-};
 </script>
 @endsection
