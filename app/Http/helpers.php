@@ -29,9 +29,9 @@ function barcodeGenerator($data){
 	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "C39",1,1).'" width="100%" height="24" />';
 }
 
-function item_barcodeGenerator($data){
+function item_barcodeGenerator($data){//EAN13最後1位是檢查碼，不可以亂輸入
 	$barcode = new DNS1D();
-	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "EAN13",1,1).'" width="140px" height="50px" />';
+	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "EAN13",1,1).'" width="120px" height="25px" />';
 }
 
 function qrcodeGenerator($data){
