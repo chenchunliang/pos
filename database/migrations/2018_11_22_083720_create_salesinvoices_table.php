@@ -18,7 +18,7 @@ class CreatesalesinvoicesTable extends Migration
 			$table->string('salesinvoice_invoicenumber');
 			$table->date('salesinvoice_date');
 			$table->time('salesinvoice_time');
-			$table->string('salesinvoice_identifier');
+			$table->string('salesinvoice_identifier')->nullable($value = true);
 			$table->integer('salesinvoice_randomnumber');
 			$table->text('salesinvoice_productarray');
 			$table->integer('salesinvoice_tnsalesamount');
