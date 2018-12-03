@@ -11,9 +11,9 @@
     <tbody>
     @foreach(json_decode($Salesinvoice->salesinvoice_productarray) as $productArray)
     <tr>
-      <td align="center">{{$productArray->ProductName}}</td>
-      <td align="center">{{$productArray->ProductQty}}</td>
-      <td align="center">{{$productArray->ProductAmount}}</td>
+      <td align="center">{{ $productArray->ProductName }}</td>
+      <td align="center">{{ $productArray->ProductQty }}</td>
+      <td align="center">{{ number_format($productArray->ProductAmount) }}</td>
     </tr>
     @endforeach
     </tbody>
