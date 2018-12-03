@@ -18,17 +18,17 @@ class CreatesalesinvoicesTable extends Migration
 			$table->string('salesinvoice_invoicenumber');
 			$table->date('salesinvoice_date');
 			$table->time('salesinvoice_time');
-			$table->integer('salesinvoice_identifier');
+			$table->string('salesinvoice_identifier');
 			$table->integer('salesinvoice_randomnumber');
 			$table->text('salesinvoice_productarray');
 			$table->integer('salesinvoice_tnsalesamount');
 			$table->integer('salesinvoice_txsalesamount');
 			$table->integer('salesinvoice_taxamount');
 			$table->integer('salesinvoice_totalamount');
-			$table->integer('salesinvoice_printstate');
-			$table->integer('salesinvoice_invalidstate');
-			$table->integer('salesinvoice_C0401state');
-			$table->integer('salesinvoice_C0501state');
+			$table->integer('salesinvoice_printstate')->nullable($value = true)->default(0);
+			$table->integer('salesinvoice_invalidstate')->nullable($value = true)->default(0);
+			$table->integer('salesinvoice_C0401state')->nullable($value = true)->default(0);
+			$table->integer('salesinvoice_C0501state')->nullable($value = true)->default(0);
 			$table->string('salesinvoice_remark');
 			
 			$table->unsignedInteger('customer_id');
