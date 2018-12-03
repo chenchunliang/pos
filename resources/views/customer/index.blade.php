@@ -23,7 +23,7 @@
   <tr>
     <td>{{ $customer->customer_name }}</td>
     <td>{{ $customer->customer_identifier?$customer->customer_identifier:"無" }}</td>
-    <td>{{ $customer->customer_remark }}</td>
+    <td>{{ $customer->customer_remark?$customer->customer_remark:"無" }}</td>
     <th> <a href="{{url('customer/'.$customer->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('customer/'.$customer->id)}}" method="post" id="customer_delete_{{$customer->id}}" class="deletebtn_form">
         {{csrf_field()}}
