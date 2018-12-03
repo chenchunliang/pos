@@ -14,6 +14,7 @@
       <th>品名</th>
       <th>規格</th>
       <th>條碼</th>
+      <th>售價</th>
       <th>單位</th>
       <th>稅別</th>
       <th>照片</th>
@@ -27,9 +28,24 @@
     <td>{{ $item->item_name }}</td>
     <td>{{ $item->item_specification }}</td>
     <td>{{ $item->item_barcode }}<br>{!!item_barcodeGenerator($item->item_barcode)!!}</td>
+    <td>
+    @php
+      $i=1;
+    @endphp
+    
+    @foreach($Parameters as $Parameter)
+    
+    @php
+      	$item_unitprice='item_unitprice'.$i;
+    @endphp
+      
+        <p>售價{{$text[$i]}} ({{$Parameter->parameter_value?$Parameter->parameter_value:"未定義"}})：{{$item->$item_unitprice}}元</p>
+        @php $i++; @endphp
+        @endforeach
+    </td> 
     <td>{{ $item->item_unit }}</td>
     <td>{{ $item->item_taxtype==1?'免稅':'應稅內含' }}</td>
-    <td><img src='{{ $item->item_image }}' width="100"></td>
+    <td><img src='{{ $item->item_image }}' width="80"></td>
     <th> <a href="{{url('item/'.$item->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('item/'.$item->id)}}" method="post" id="item_delete_{{$item->id}}" class="deletebtn_form">
         {{csrf_field()}}
