@@ -10,8 +10,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "picqer/php-barcode-generator": "^0.2.2",
-		"laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "milon/barcode": "^5.3",
+        "picqer/php-barcode-generator": "^0.2.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
