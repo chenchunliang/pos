@@ -84,25 +84,13 @@
                             <a href="{{url('menu')}}"><i class="fa fa-dashboard fa-fw"></i>主選單</a>
                         </li>
                         <li>
-                            <a href="{{url('parameter')}}"><i class="fa fa-dashboard fa-fw"></i>基本參數設定</a>
-                        </li>
-                        <li>
-                            <a href="{{url('item')}}"><i class="fa fa-dashboard fa-fw"></i>貨品設定</a>
-                        </li>
-                        <li>
-                            <a href="{{url('catalog')}}"><i class="fa fa-dashboard fa-fw"></i>櫃台目錄設定</a>
-                        </li>
-                        <li>
-                            <a href="{{url('customer')}}"><i class="fa fa-dashboard fa-fw"></i>客戶設定</a>
-                        </li>
-                        <li>
-                            <a href="{{url('sales')}}"><i class="fa fa-dashboard fa-fw"></i>櫃台作業</a>
+                            <a href="{{url('salesinvoice/sales')}}"><i class="fa fa-dashboard fa-fw"></i>櫃台作業</a>
                         </li>
                         <li>
                             <a href="{{url('salesinvoice')}}"><i class="fa fa-dashboard fa-fw"></i>銷貨發票管理</a>
                         </li>
                         <li>
-                            <a href="{{url('invoice')}}"><i class="fa fa-dashboard fa-fw"></i>發票配號檔</a>
+                            <a href="{{url('invalidinvoice')}}"><i class="fa fa-dashboard fa-fw"></i>作廢發票管理</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>發票明細表<span class="fa arrow"></span></a>
@@ -140,7 +128,21 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <li>
+                            <a href="{{url('parameter')}}"><i class="fa fa-dashboard fa-fw"></i>基本參數設定</a>
+                        </li>
+                        <li>
+                            <a href="{{url('item')}}"><i class="fa fa-dashboard fa-fw"></i>貨品設定</a>
+                        </li>
+                        <li>
+                            <a href="{{url('catalog')}}"><i class="fa fa-dashboard fa-fw"></i>櫃台目錄設定</a>
+                        </li>
+                        <li>
+                            <a href="{{url('customer')}}"><i class="fa fa-dashboard fa-fw"></i>客戶設定</a>
+                        </li>                        
+                        <li>
+                            <a href="{{url('invoice')}}"><i class="fa fa-dashboard fa-fw"></i>發票設定</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
