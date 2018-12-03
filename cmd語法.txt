@@ -39,3 +39,6 @@ php artisan make:seeder InvalidinvoiceTableSeeder
 php artisan make:seeder UserTableSeeder
 
 php artisan migrate:refresh --seed
+
+composer dumpautoload
+composer clear-cache
