@@ -29,7 +29,7 @@ class CreatesalesinvoicesTable extends Migration
 			$table->integer('salesinvoice_invalidstate')->nullable($value = true)->default(0);
 			$table->integer('salesinvoice_C0401state')->nullable($value = true)->default(0);
 			$table->integer('salesinvoice_C0501state')->nullable($value = true)->default(0);
-			$table->string('salesinvoice_remark');
+			$table->string('salesinvoice_remark')->nullable($value = true);
 			
 			$table->unsignedInteger('customer_id');
 			$table->foreign('customer_id')->references('id')->on('customers');
