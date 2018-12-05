@@ -4,7 +4,9 @@
 //use Endroid\QrCode\LabelAlignment;
 use Milon\Barcode\DNS1D;
 use Milon\Barcode\DNS2D;
+use App\Parameter;
 
+/*
 function is_cellphone(){
 	$device='/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|'.
           'docomo|elaine|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|'.
@@ -22,7 +24,7 @@ function is_iphone(){
 		return true;
 	else return false;
 }
-
+*/
 
 function barcodeGenerator($data){
 	$barcode = new DNS1D();
@@ -61,7 +63,10 @@ function qrcodeGenerator($qrCode){
 */
 	
 function aseEncrypt($data){
-	$AESkey =  hex2bin("6F42C5148D45357E77124DC9CD27225A");//公司取得之AESkey
+	$Parameter_AESkey=Parameter::where('parameter_code','AESkey')->first()->parameter_value;
+	//6F42C5148D45357E77124DC9CD27225A
+	$AESkey =  hex2bin($Parameter_AESkey);//公司取得之AESkey
+	
 	$iv 	= base64_decode("Dt8lyToo17X/XkXaQvihuA==");//財政部固定值
 	$method = 'AES-128-CBC';//加密方法
 	
@@ -70,14 +75,15 @@ function aseEncrypt($data){
 
 							//發票號碼		發票日期		隨機碼			銷售額			總計		買方統編				商品資訊
 function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmount,$TotalAmount,$BuyerIdentifier,$ProductArrays){
-	
-	$SellerIdentifier="55891836";
+		
+	$Parameter_companyIdentifier=Parameter::where('parameter_code','companyIdentifier')->first();
+	$SellerIdentifier=$Parameter_companyIdentifier->parameter_value;
 	
 	$codepath=array('barcode'=>'','qr1'=>'','qr2'=>'');
 	
 	//--------barcode--------
-	$InvoicePeriod=substr($InvoiceDate,0,3);
-	$m=substr($InvoiceDate,3,2);
+	$InvoicePeriod=intval(substr($InvoiceDate,0,3));
+	$m=intval(substr($InvoiceDate,3,2));
 	
 	if($m%2==0) $InvoicePeriod.=$m;
 	if($m%2!=0) $InvoicePeriod.=str_pad(($m+1),2,"0",STR_PAD_LEFT);
@@ -86,8 +92,9 @@ function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmoun
 	//-----------------------
 	
 	//--------QRrcode--------
-	$RepresentIdentifier='00000000';
-
+	$RepresentIdentifier='00000000';//固定
+	$BuyerIdentifier=$BuyerIdentifier?$BuyerIdentifier:'00000000';
+	
 	$SalesAmount=str_pad(dechex($SalesAmount),8,"0",STR_PAD_LEFT);
 	$TotalAmount=str_pad(dechex($TotalAmount),8,"0",STR_PAD_LEFT);	
 	$aesbase64=aseEncrypt($InvoiceNumber.$RandomNumber);
@@ -146,5 +153,6 @@ function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmoun
 	return $codepath;
 	//-----------------------
 }
-	
+
+
 ?>
