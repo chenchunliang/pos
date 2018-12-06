@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Invalidinvoice;
 use App\Salesinvoice;
+use App\Parameter;
 
 class InvalidinvoiceController extends Controller
 {
@@ -113,6 +114,30 @@ class InvalidinvoiceController extends Controller
 		}		
 		return redirect('invalidinvoice');
     }
+	
+	
+	public function uploadC0501(){//定時處理：工作排程器+wget
+		
+		$Salesinvoices=Salesinvoice::all()->where("salesinvoice_date",date("Y-m-d"))->where("salesinvoice_C0401state",1)->where("salesinvoice_invalidstate",1)->where("salesinvoice_C0501state",0);
+		//dd($Salesinvoices->first()->invalidinvoice);
+		
+		$Parameters=Parameter::all();
+		$Parameter_companyIdentifier=$Parameters->where('parameter_code','companyIdentifier')->first()->parameter_value;
+		$uploadC0501Folder=$Parameters->where('parameter_code','uploadC0501Folder')->first()->parameter_value;
+		
+		foreach($Salesinvoices as $Salesinvoice){
+			$others=array();
+			$others['companyIdentifier']=$Parameter_companyIdentifier;
+			$others['uploadC0501Folder']=$uploadC0501Folder;
+			$rs=C0501JsonGenerator($Salesinvoice,$others);
+			
+			if($rs){
+				$Salesinvoice->salesinvoice_C0501state=1;//有上傳成功 變成1
+				$Salesinvoice->update();
+			}//end if
+		}//end foreach
+	}//end function
+	
 
     /**
      * Remove the specified resource from storage.
