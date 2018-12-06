@@ -82,6 +82,8 @@ class SalesinvoiceController extends Controller
 		$Salesinvoice->customer_id=$request->customer_id;
 		$result=$Salesinvoice->save();
 		
+		$salesinvoices_id=$Salesinvoice->id;
+		
 		$Nextinvoicenumber="";//下一發票號碼
 		$Nextinvoiceid="";//下一發票id
 		
@@ -89,6 +91,7 @@ class SalesinvoiceController extends Controller
 			$Invoice=Invoice::find($invoices_id);
 			$salesinvoice_invoicenumber=substr($request->salesinvoice_invoicenumber,2,8);
 			$Invoice->invoice_currentnumber=$salesinvoice_invoicenumber;
+			$Invoice->update();
 			
 			if(intval($Invoice->invoice_endnumber)>intval($salesinvoice_invoicenumber)){//目前發票還沒用完
 				$Nextinvoicenumber=intval($salesinvoice_invoicenumber)+1;
@@ -103,9 +106,10 @@ class SalesinvoiceController extends Controller
 				}else{//奇數月 看endmonoth
 					$Invoice2=Invoice::where('invoice_startmonth',$thisYear.$thisMonth)->get()->sortBy('invoice_startmonth');
 				}
+				
 				$Invoice2=$Invoice2->filter(function($invoice2){//目前號碼不等於發票末碼 才可以取出資料
 					return ($invoice2->invoice_endnumber>$invoice2->invoice_currentnumber)?$invoice2:'';
-				});
+				});				
 				$Invoice2=$Invoice2->first();
 				
 				if($Invoice2){
@@ -114,15 +118,16 @@ class SalesinvoiceController extends Controller
 					
 				}else{
 					$Nextinvoicenumber='★☆★☆發票號碼用罄☆★☆★';
-				}
-				
-				
-			}
-			$Invoice->update();
+				}//end else
+			}//end else
+			
 		}
+		
+		
 		
 		$json=array(
 			"result"=>$result,
+			"salesinvoices_id"=>$salesinvoices_id,
 			"Nextinvoiceid"=>$Nextinvoiceid,
 			"Nextinvoicenumber"=>$Nextinvoicenumber
 		);
@@ -135,9 +140,55 @@ class SalesinvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,$type=1)//1正常 2重印  3補印
     {
         //
+		$Salesinvoice=Salesinvoice::find($id);
+		$Parameters=Parameter::all();
+		
+		$title="電子發票證明聯";
+		
+		$date=$Salesinvoice->salesinvoice_date;
+		
+		$y=intval(substr($date,0,4))-1911;//要換成民國
+		$m1=intval(substr($date,5,2))%2==0?intval(substr($date,5,2))-1:intval(substr($date,5,2));
+		$m2=$m1+1;
+		
+		$salesinvoice_date_text=$y."年".$m1."-".$m2."月";
+		$salesinvoice_date=$y.substr($date,5,2).substr($date,8,2);
+		
+		$Parameter_companyIdentifier=$Parameters->where('parameter_code','companyIdentifier')->first()->parameter_value;
+		$companyName=$Parameters->where('parameter_code','companyName')->first()->parameter_value;
+		$companyPhone=$Parameters->where('parameter_code','companyPhone')->first()->parameter_value;
+		$invoiceDetail=$Parameters->where('parameter_code','invoiceDetail')->first()->parameter_value;
+		$companyAddress=$Parameters->where('parameter_code','companyAddress')->first()->parameter_value;
+		$invoiceImage=$Parameters->where('parameter_code','invoiceImage')->first()->parameter_value;
+		
+		
+		$ProductArrays=json_decode($Salesinvoice->salesinvoice_productarray,true);
+		
+		
+		
+		//發票號碼、發票日期	、隨機碼、銷售額、總計、買方統編、商品資訊
+		$path= createInvoiceCode(
+					$Salesinvoice->salesinvoice_invoicenumber,
+					$salesinvoice_date,
+					$Salesinvoice->salesinvoice_randomnumber,
+					($Salesinvoice->salesinvoice_txsalesamount+$Salesinvoice->salesinvoice_tnsalesamount),
+					$Salesinvoice->salesinvoice_totalamount,
+					$Salesinvoice->salesinvoice_identifier,
+					$ProductArrays
+				);
+				
+		$barcode=$path['barcode'];
+		$qr1=$path['qr1'];
+		$qr2=$path['qr2'];
+				
+		if($type==3){
+			$title.="(補)";		
+		}
+		
+		return view('salesinvoice.qr',compact('Salesinvoice','invoiceImage','title','salesinvoice_date_text','Parameter_companyIdentifier','barcode','qr1','qr2','invoiceDetail','companyName','companyPhone','companyAddress','ProductArrays'));
     }
 
     /**
@@ -171,7 +222,7 @@ class SalesinvoiceController extends Controller
         //更新銷貨發票
 		$validated=$request->validate([
 			'customer_id'=>'required',
-			'salesinvoice_identifier'=>'required',
+			'salesinvoice_identifier'=>'nullable',
 			'salesinvoice_remark'=>'nullable',
 		]);
 		
@@ -237,6 +288,33 @@ class SalesinvoiceController extends Controller
 		
     }
 
+
+	public function uploadC0401(){//定時處理：工作排程器+wget
+		
+		$Salesinvoices=Salesinvoice::all()->where("salesinvoice_date",date("Y-m-d"))->where("salesinvoice_C0401state",0);
+		//dd($Salesinvoices);
+		
+		$Parameters=Parameter::all();		
+		$Parameter_companyIdentifier=$Parameters->where('parameter_code','companyIdentifier')->first()->parameter_value;
+		$companyName=$Parameters->where('parameter_code','companyName')->first()->parameter_value;
+		$uploadC0401Folder=$Parameters->where('parameter_code','uploadC0401Folder')->first()->parameter_value;
+		
+		$others=array();
+		foreach($Salesinvoices as $Salesinvoice){
+			$others['companyIdentifier']=$Parameter_companyIdentifier;
+			$others['companyName']=$companyName;
+			$others['uploadC0401Folder']=$uploadC0401Folder;
+			$rs=C0401JsonGenerator($Salesinvoice,$others);
+			
+			if($rs){
+				$Salesinvoice->salesinvoice_C0401state=1;//有上傳成功 變成1
+				$Salesinvoice->update();
+			}//end if
+		}//end foreach
+
+	}//end function
+	
+	
     /**
      * Remove the specified resource from storage.
      *
