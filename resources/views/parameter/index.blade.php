@@ -37,7 +37,7 @@
     <td>{{ $parameter->parameter_groups }}</td>
     <td>{{ $parameter->parameter_code }}</td>
     <td>{{ $parameter->parameter_title }}</td>
-    <td>{{ $parameter->parameter_value }}</td>
+    <td style="word-break:break-word;">{{ $parameter->parameter_value }}</td>
     <th> <a href="{{url('parameter/'.$parameter->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('parameter/'.$parameter->id)}}" method="post" id="parameter_delete_{{$parameter->id}}" class="deletebtn_form">
         {{csrf_field()}}
