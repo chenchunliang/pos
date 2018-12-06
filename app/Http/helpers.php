@@ -154,5 +154,81 @@ function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmoun
 	//-----------------------
 }
 
+function C0401JsonGenerator($Salesinvoice,$others){
+	$date = new DateTime($Salesinvoice->salesinvoice_date.' '.$Salesinvoice->salesinvoice_time, new DateTimeZone('Asia/Taipei'));
+	$unix_time=floatval($date->getTimestamp());
+	
 
+	$invoice['m']=array(
+		'n'=>$Salesinvoice->salesinvoice_invoicenumber,
+		'd'=>$unix_time,
+		's'=>array(
+			'i'=>$others['companyIdentifier'],
+			'n'=>$others['companyName']
+		),
+		'pm'=>"Y",
+		'r'=>strval($Salesinvoice->salesinvoice_randomnumber)
+	);
+	
+	if($Salesinvoice->salesinvoice_identifier){
+		$invoice['m']=array_merge($invoice['m'],array('b'=>array('i'=>$Salesinvoice->salesinvoice_identifier)));
+	}
+	
+	$invoice['a']=array(
+		's'=>intval($Salesinvoice->salesinvoice_txsalesamount),
+		'f'=>intval($Salesinvoice->salesinvoice_tnsalesamount),
+		'z'=>intval(0),//零稅率
+		'ta'=>intval($Salesinvoice->salesinvoice_taxamount),
+		'a'=>intval($Salesinvoice->salesinvoice_totalamount)
+	);
+	
+	$ProductItemArray=array();
+	$SequenceNumber=1;
+	
+	foreach(json_decode($Salesinvoice->salesinvoice_productarray,true) as $ProductItem){
+		
+		array_push($ProductItemArray,
+			array(
+				'd'=>$ProductItem['ProductName'],
+				'q'=>floatval($ProductItem['ProductQty']),
+				'p'=>floatval($ProductItem['ProductAmount']),
+				'a'=>floatval($ProductItem['ProductSumAmount']),
+				's'=>strval($SequenceNumber++),
+				'r'=>($ProductItem['TaxType']=="TN"?"Tf":"Tx")
+			)
+		);
+		
+	}//end foreach
+	
+	$invoice['d']['l']=$ProductItemArray;
+	$json_text=json_encode($invoice,JSON_PRESERVE_ZERO_FRACTION);
+	
+	$file = fopen($others['uploadC0401Folder']."/C0401-".$Salesinvoice->salesinvoice_invoicenumber.".json","w");
+	$rs=fwrite($file,$json_text);
+	fclose($file);
+	
+	return $rs;
+}
+
+
+
+function C0501JsonGenerator($Salesinvoice,$others){
+	$invalidinvoice=$Salesinvoice->invalidinvoice;
+	$invalidinvoice=$invalidinvoice->first();
+	
+	$invoice=array(
+		'n'=>$Salesinvoice->salesinvoice_invoicenumber,
+		'd'=>floatval(strtotime($Salesinvoice->salesinvoice_date)),
+		'cd'=>floatval(strtotime($invalidinvoice->invalidinvoice_invaliddate.' '.$invalidinvoice->invalidinvoice_invalidtime)),
+		'r'=>$invalidinvoice->invalidinvoice_invalidreason
+	);
+	
+	$json_text=json_encode($invoice,JSON_PRESERVE_ZERO_FRACTION);
+	
+	$file = fopen($others['uploadC0501Folder']."/C0501-".$Salesinvoice->salesinvoice_invoicenumber.".json","w");
+	$rs=fwrite($file,$json_text);
+	fclose($file);
+	
+	return $rs;
+}
 ?>
