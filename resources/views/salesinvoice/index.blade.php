@@ -39,13 +39,17 @@
     </td>
     <td>
       <p>列印：{{ $salesinvoice->salesinvoice_printstate?'V':'X' }}</p>
-      <p>作廢：{{ $salesinvoice->salesinvoice_invalidstate?'V':'X' }}</p>
       <p>上傳開立：{{ $salesinvoice->salesinvoice_C0401state?'V':'X' }}</p>
+      <p>作廢：{{ $salesinvoice->salesinvoice_invalidstate?'V':'X' }}</p>
       <p>上傳作廢：{{ $salesinvoice->salesinvoice_C0501state?'V':'X' }}</p>
     </td>
     <td>{{ $salesinvoice->salesinvoice_remark }}</td>
-    <th> <button type="button" class="btn btn-default btn-lg product_detail" data-toggle="modal" data-target="#myModal" data-sid="{{$salesinvoice->id}}">查看品項明細</button>
+    <th>
+    <button type="button" class="btn btn-default btn-lg product_detail" data-toggle="modal" data-target="#myModal" data-sid="{{$salesinvoice->id}}">查看品項明細</button>
       <br>
+      <p><a href="{{url('salesinvoice/show/'.$salesinvoice->id.'/type/2')}}" role="button" class="btn btn-info btn-lg" target="_blank">重印</a>
+      <a href="{{url('salesinvoice/show/'.$salesinvoice->id.'/type/3')}}" role="button" class="btn btn-success btn-lg" target="_blank">補印</a>
+      </p>
       <a href="{{url('salesinvoice/'.$salesinvoice->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('salesinvoice/'.$salesinvoice->id)}}" method="post" id="salesinvoice_delete_{{$salesinvoice->id}}" class="deletebtn_form">
         {{csrf_field()}}
