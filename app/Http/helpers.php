@@ -26,6 +26,52 @@ function is_iphone(){
 }
 */
 
+function get_thisweek($day){
+
+	$dayweek=get_number_weekday($day);//算出這天星期幾(數字)
+		switch($dayweek){
+			case 1:
+				$startday=date("Y-m-d",strtotime($day));
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*6);
+		break;
+			case 2:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*1);
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*5);
+		break;
+			case 3:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*2);
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*4);
+		break;
+			case 4:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*3);
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*3);
+		break;
+			case 5:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*4);
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*2);
+		break;
+			case 6:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*5);
+				$endday=date("Y-m-d",strtotime($day)+60*60*24*1);
+		break;
+			case 7:
+				$startday=date("Y-m-d",strtotime($day)-60*60*24*6);
+				$endday=date("Y-m-d",strtotime($day));
+		break;
+		}//end switch
+		return array($startday,$endday);
+}
+
+function get_number_weekday($datetime){
+    $weekday = date('w', strtotime($datetime));
+	$weeklist = array(7, 1, 2, 3, 4, 5, 6);
+    return $weeklist[$weekday];
+}
+
+function lastDateOfMonth($date){
+	return date("Y-m-t", strtotime($date));
+}
+
 function barcodeGenerator($data){
 	$barcode = new DNS1D();
 	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "C39",1,1).'" width="100%" height="24" />';
@@ -210,15 +256,13 @@ function C0401JsonGenerator($Salesinvoice,$others){
 	return $rs;
 }
 
-
-
 function C0501JsonGenerator($Salesinvoice,$others){
 	$invalidinvoice=$Salesinvoice->invalidinvoice;
 	$invalidinvoice=$invalidinvoice->first();
 	
 	$invoice=array(
 		'n'=>$Salesinvoice->salesinvoice_invoicenumber,
-		'd'=>floatval(strtotime($Salesinvoice->salesinvoice_date)),
+		'd'=>floatval(strtotime($Salesinvoice->salesinvoice_date.' '.$Salesinvoice->salesinvoice_time)),
 		'cd'=>floatval(strtotime($invalidinvoice->invalidinvoice_invaliddate.' '.$invalidinvoice->invalidinvoice_invalidtime)),
 		'r'=>$invalidinvoice->invalidinvoice_invalidreason
 	);
@@ -230,5 +274,24 @@ function C0501JsonGenerator($Salesinvoice,$others){
 	fclose($file);
 	
 	return $rs;
+}
+
+function emptyInvoiceGenerator($Invoices,$others){
+	$n=1;
+	$text="";
+	foreach($Invoices as $Invoice){
+		$text.=$n.','.$others['companyIdentifier'].','.$others['period'].','
+			  .$Invoice->invoice_wordtrack.','.str_pad($Invoice->invoice_currentnumber+1,8,'0',STR_PAD_LEFT).','.$Invoice->invoice_endnumber.",07\r\n";
+		$Invoice->invoice_emptynumber=1;//有匯出
+        $Invoice->update();
+		
+		$n++;
+	}
+	
+	if(count($Invoices)>0){
+		$file = fopen($others['uploadEmptyFolder']."/emptyInvoice-".$others['period'].".csv","w");
+		$rs=fwrite($file,$text);
+		fclose($file);
+	}
 }
 ?>
