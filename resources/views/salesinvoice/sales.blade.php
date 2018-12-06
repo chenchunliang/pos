@@ -54,7 +54,7 @@
 <table width="100%" class="table table-striped table-bordered">
   
     <th width="20%"><a href="{{url('invoice')}}" target="_blank">發票號碼</a></th>
-    <th width="20%"><input type="hidden" id="invoices_id" value="{{$Invoice->id}}"><input name="salesinvoice_invoicenumber" id="salesinvoice_invoicenumber" type="text" class="form-control" readonly value="{{($Invoice)?$Invoice->invoice_wordtrack.(str_pad($Invoice->invoice_currentnumber+1,8,'0',STR_PAD_LEFT)):'★☆★☆發票號碼用罄☆★☆★'}}" style="text-align:center"></th>
+    <th width="20%"><input type="hidden" id="invoices_id" value="{{($Invoice)?$Invoice->id:''}}"><input name="salesinvoice_invoicenumber" id="salesinvoice_invoicenumber" type="text" class="form-control" readonly value="{{($Invoice)?$Invoice->invoice_wordtrack.(str_pad($Invoice->invoice_currentnumber+1,8,'0',STR_PAD_LEFT)):'★☆★☆發票號碼用罄☆★☆★'}}" style="text-align:center"></th>
     <th width="20%">發票日期</th>
     <th width="20%">{{date('Y/m/d')}}</th>
     <th width="20%">{{HTML::image('images/barcode_sample.png','barcode sample image',array('width'=>100))}}</th>
@@ -167,6 +167,7 @@
 </table>
 <input type="hidden" id="rownumber" value="0">
     
+<!--找零-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content" id="modal-content">
@@ -182,10 +183,26 @@
   </div>
   <!-- /.modal-dialog --> 
 </div>
+
+<!--發票號碼用罄-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modal-content" style="padding: 4% 0%;">
+    <h1 style="color:red; text-align:center">發票號碼用罄</h1>
+    <p>&nbsp;</p>
+    <p style="text-align:center"><a href="{{url('invoice')}}" target="_blank" role="button" class="btn btn-warning btn-lg">設定發票號碼</a></p>
+    </div>
+    <!-- /.modal-content --> 
+  </div>
+  <!-- /.modal-dialog --> 
+</div>
 @endsection
 
 @section('customjs') 
 <script>
+
+{{($Invoice)?"":"noInvoicenumber()"}}
+
 $('#customer_id').change(function() {
 	var customerObject =getCustomerById(this.value)[0];
 	$('#salesinvoice_identifier').val(customerObject.customer_identifier);
@@ -251,6 +268,13 @@ $('.checkout_btn').click(function() {
 	checkout_all_item();
 });
 
+function noInvoicenumber(){//發票號碼用罄
+	$('#myModal2').modal('show');
+	$('#change_btn').prop('disabled',true);
+	$('.checkout_btn').prop('disabled',true);
+}
+
+
 function checkout_all_item(){//結帳
 	console.log("結帳");
 	
@@ -275,6 +299,7 @@ function checkout_all_item(){//結帳
 			'"ProductName":"'+item_name+'",'+
 			'"ProductQty":"'+qty+'",'+
 			'"ProductAmount":"'+amount+'",'+
+			'"ProductSumAmount":"'+(qty*amount)+'",'+
 			'"TaxType":"'+(taxtype==1?'TN':'TX')+
 			'"},';
 		
@@ -333,6 +358,9 @@ function checkout_all_item(){//結帳
 			obj=JSON.parse(msg);
 			console.log(obj);
 			if(obj.result){
+				
+				window.open("{{url('salesinvoice/show')}}/"+obj.salesinvoices_id+'/type/1');
+				
 				$('#invoices_id').val(obj.Nextinvoiceid);
 				$('#salesinvoice_invoicenumber').val(obj.Nextinvoicenumber);
 				$('#salesinvoice_identifier').val('');
@@ -343,10 +371,17 @@ function checkout_all_item(){//結帳
 				deleteThisRow('all');
 				$('#barcode_input_area').focus();
 				$('#myModal').modal('hide');
+				
+				
 			}else{
 				alert('錯誤!');	
 			}
-		}
+		},//end success
+		complete: function(msg) {
+            if(!obj.Nextinvoiceid){
+				noInvoicenumber();//發票號碼用罄
+			}
+        } 
 	});
 	
 	}else{
