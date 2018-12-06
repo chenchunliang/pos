@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Invoice;
+use App\Parameter;
 
 class InvoiceController extends Controller
 {
@@ -100,6 +101,23 @@ class InvoiceController extends Controller
 		
 		return redirect('invoice');
     }
+	
+	
+	public function outputEmptyInvoice(){//每偶數月最後1日 晚上23:58:00 定時處理：工作排程器+wget
+
+		$period=(date("Y")-1911).date("m");
+		$Invoices=Invoice::all()->where("invoice_endmonth",$period)->where("invoice_emptynumber",0);
+		$Invoices=$Invoices->filter(function($invoice){//目前號碼不等於發票末碼 才可以取出資料
+			return ($invoice->invoice_endnumber>$invoice->invoice_currentnumber)?$invoice:'';
+		});
+				
+		$Parameters=Parameter::all();		
+		$Parameter_companyIdentifier=$Parameters->where('parameter_code','companyIdentifier')->first()->parameter_value;
+		$uploadEmptyFolder=$Parameters->where('parameter_code','uploadEmptyFolder')->first()->parameter_value;
+		
+		$others=array('period'=>$period,'companyIdentifier'=>$Parameter_companyIdentifier,'uploadEmptyFolder'=>$uploadEmptyFolder);
+		$rs=emptyInvoiceGenerator($Invoices,$others);
+	}
 
     /**
      * Remove the specified resource from storage.
