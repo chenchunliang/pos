@@ -38,8 +38,8 @@ input[type=number]{
     <tr>
       <th>列印狀態：
       <input type="checkbox" class="form-control" name="salesinvoice_printstate"  value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_printstate?'checked':''}}></th>
-      <th>作廢狀態：<input type="checkbox" class="form-control" name="salesinvoice_invalidstate" value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_invalidstate?'checked':''}}></th>
       <th>上傳開立：<input type="checkbox" class="form-control" name="salesinvoice_C0401state" value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_C0401state?'checked':''}}></th>
+      <th>作廢狀態：<input type="checkbox" class="form-control" name="salesinvoice_invalidstate" value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_invalidstate?'checked':''}}></th>
       <th>上傳作廢：<input type="checkbox" class="form-control" name="salesinvoice_C0501state" value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_C0501state?'checked':''}}></th>
     </tr>
     <tr>
@@ -117,13 +117,13 @@ $('#insertbtn').click(function() {
 	"<select class=\"form-control\" name=\"ProductName[]\" id=\"ProductName_"+n+"\" "+		
 	 	"onBlur=\"calculateProductAmount("+n+")\" data-n=\""+n+"\">"+
         @foreach($Items as $Item)
-        "<option value=\"{{$Item->item_name}}\" data-id=\"{{$Item->id}}\" data-taxtype=\"{{$Item->item_taxtype}}\" data-unitprice1=\"{{$Item->item_unitprice1}}\" data-unitprice2=\"{{$Item->item_unitprice2}}\" data-unitprice3=\"{{$Item->item_unitprice3}}\" data-unitprice4=\"{{$Item->item_unitprice4}}\" data-unitprice5=\"{{$Item->item_unitprice5}}\" @if($productArray->ProductCode==$Item->id) selected @endif >{{$Item->item_name}}</option>"+
+        "<option value=\"{{$Item->item_name}}\" data-id=\"{{$Item->id}}\" data-taxtype=\"{{$Item->item_taxtype}}\" data-unitprice1=\"{{$Item->item_unitprice1}}\" data-unitprice2=\"{{$Item->item_unitprice2}}\" data-unitprice3=\"{{$Item->item_unitprice3}}\" data-unitprice4=\"{{$Item->item_unitprice4}}\" data-unitprice5=\"{{$Item->item_unitprice5}}\">{{$Item->item_name}}</option>"+
 		@endforeach
 	"</select>"+
 	"</td>"+
 	"<td align=\"center\">"+
 		"<input type=\"number\" class=\"form-control\" name=\"ProductQty[]\" id=\"ProductQty_"+n+
-		"\"onBlur=\"calculatetotalAmount()\">"+
+		"\"onBlur=\"calculatetotalAmount()\" value=\"1\">"+
 	"</td>"+
 	"<td align=\"center\">"+
 		"<input type=\"number\" class=\"form-control\" name=\"ProductAmount[]\" id=\"ProductAmount_"+n+"\" onBlur=\"calculatetotalAmount()\">"+
