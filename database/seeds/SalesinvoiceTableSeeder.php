@@ -13,6 +13,7 @@ class SalesinvoiceTableSeeder extends Seeder
     public function run()
     {
         //
+		/*
 		$ProductSumAmount=100;
 		$ProductArrays=array(
 	array("ProductCode"=>"00001","ProductName"=>"黑豆","ProductQty"=>"1","ProductSaleAmount"=>"171","ProductTaxAmount"=>"9","ProductAmount"=>"180","ProductSumAmount"=>$ProductSumAmount,"TaxType"=>"TN"),
@@ -42,5 +43,6 @@ class SalesinvoiceTableSeeder extends Seeder
 		$salesinvoice->customer_id =1;
 		
         $salesinvoice->save();
+		*/
     }
 }

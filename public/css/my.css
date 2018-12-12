@@ -46,3 +46,18 @@ input[type="file"] {
 .deletebtn_form{
 	display: inline-block;
 }
+.product_detail{
+	margin:4px 0px;
+}
+
+.font_green{
+	color:#0a9b0a;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

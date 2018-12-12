@@ -19,7 +19,7 @@ class CreateInvalidinvoicesTable extends Migration
 			$table->time('invalidinvoice_invalidtime');
 			$table->string('invalidinvoice_invalidreason');
 			
-			$table->unsignedInteger('salesinvoice_id');
+			$table->unsignedBigInteger('salesinvoice_id');
 			$table->foreign('salesinvoice_id')->references('id')->on('salesinvoices');
 			
             $table->timestamps();

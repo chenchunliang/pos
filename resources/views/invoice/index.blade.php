@@ -17,6 +17,7 @@
       <th>發票起始號碼</th>
       <th>發票結束號碼</th>
       <th>發票目前號碼</th>
+      <th>空白發票匯出</th>
       <th>功能</th>
     </tr>
   </thead>
@@ -30,6 +31,7 @@
     <td>{{ $invoice->invoice_startnumber }}</td>
     <td>{{ $invoice->invoice_endnumber }}</td>
     <td>{{ $invoice->invoice_currentnumber }}</td>
+    <td>{{ $invoice->invoice_emptynumber?"是":"無" }}</td>
     <th> <a href="{{url('invoice/'.$invoice->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('invoice/'.$invoice->id)}}" method="post" id="invoice_delete_{{$invoice->id}}" class="deletebtn_form">
         {{csrf_field()}}

@@ -12,14 +12,15 @@ class InvalidinvoiceTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        /*	
 		$invalidinvoice = new Invalidinvoice;
 		
 		$invalidinvoice->invalidinvoice_invaliddate =date("Y-m-d");
 		$invalidinvoice->invalidinvoice_invalidtime =date("H:i:s");
-		$invalidinvoice->invalidinvoice_invalidreason =str_random(10);
+		$invalidinvoice->invalidinvoice_invalidreason ="發票作廢理由";
 		$invalidinvoice->salesinvoice_id=1;
 		
         $invalidinvoice->save();
+		*/
     }
 }

@@ -27,7 +27,9 @@ class CustomerController extends Controller
     public function create()
     {
         //
-		return view('customer.create');
+		
+		$customerDistinct=Customer::select('customer_group')->distinct()->get();
+		return view('customer.create',compact('customerDistinct'));
     }
 
     /**
@@ -71,7 +73,8 @@ class CustomerController extends Controller
     {
         //
 		$Customer=Customer::find($id);
-		return view('customer.edit',compact('Customer'));
+		$customerDistinct=Customer::select('customer_group')->distinct()->get();
+		return view('customer.edit',compact('Customer','customerDistinct'));
     }
 
     /**

@@ -37,6 +37,21 @@
           @endif
           </td>
       </tr>
+      @php
+      $i=1;
+      @endphp
+      @foreach($Parameters as $Parameter)      
+      <tr>
+        <th>售價{{$text[$i]}} ({{$Parameter->parameter_value?$Parameter->parameter_value:"未定義"}})</th>
+        <td align="center"><input type="number" class="form-control" name="item_unitprice{{$i}}" value="{{old('item_unitprice'.$i)}}">
+          @if($errors->has('item_unitprice'.$i))
+          <p style="color:red">請輸入價格</p>
+          @endif
+        </td>
+      </tr>
+      
+     @php $i++; @endphp
+     @endforeach
       <tr>
         <th>品項單位</th>
         <td align="center"><input type="text" class="form-control" name="item_unit" value="{{old('item_unit')}}">
@@ -62,7 +77,7 @@
       <tr>
         <th>品項圖片</th>
         <td align="center">
-        <p>建議大小：100px*100px</p>
+        <p>建議大小：55px*55px</p>
         <label for="input_img" class="form-control" style="width:200px"> <i class="fa fa-cloud-upload"></i>&nbsp;選擇照片</label>
         <input id="input_img" type="file" accept="image/*">
           @if($errors->has('item_image'))

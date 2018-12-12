@@ -11,6 +11,7 @@
 <table width="100%" class="table table-striped table-bordered table-hover" id="table1">
   <thead>
     <tr>
+      <th>客戶群組</th>
       <th>客戶名稱</th>
       <th>客戶統編</th>
       <th>備註</th>
@@ -21,9 +22,10 @@
   
   @foreach($Customers as $customer)
   <tr>
+    <td>{{ $customer->customer_group }}</td>
     <td>{{ $customer->customer_name }}</td>
     <td>{{ $customer->customer_identifier?$customer->customer_identifier:"無" }}</td>
-    <td>{{ $customer->customer_remark }}</td>
+    <td>{{ $customer->customer_remark?$customer->customer_remark:"無" }}</td>
     <th> <a href="{{url('customer/'.$customer->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('customer/'.$customer->id)}}" method="post" id="customer_delete_{{$customer->id}}" class="deletebtn_form">
         {{csrf_field()}}

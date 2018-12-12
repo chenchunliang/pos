@@ -17,7 +17,7 @@ class CreateparametersTable extends Migration
             $table->increments('id');
 			$table->string('parameter_code');
 			$table->string('parameter_title');
-			$table->string('parameter_value');
+			$table->longText('parameter_value');
 			$table->string('parameter_groups');
             $table->timestamps();
 			$table->softDeletes();

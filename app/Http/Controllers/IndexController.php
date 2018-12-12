@@ -50,10 +50,16 @@ class IndexController extends Controller
 			$request->session()->forget('user_password');
 			//$request->session()->forget('previous_route');
 			Session::flash('login_err_message', '輸入錯誤!'); 
-			return redirect('index');
+			return redirect('/');
     	}
     }
 	public function menu(){
 		return view('menu');
+	}
+	
+	public function logout(Request $request){
+		$request->session()->forget('user_id');
+		$request->session()->forget('user_password');
+		return redirect('/');
 	}
 }
