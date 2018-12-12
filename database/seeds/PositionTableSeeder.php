@@ -15,8 +15,8 @@ class PositionTableSeeder extends Seeder
         //
 		$position = new Position;
 		
-		$position->position_x =rand(0,10);
-		$position->position_y =rand(0,10);
+		$position->position_x =1;
+		$position->position_y =1;
 		$position->item_id =1;
 		$position->catalog_id =1;
 		

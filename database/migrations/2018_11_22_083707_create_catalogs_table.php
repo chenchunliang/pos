@@ -17,7 +17,7 @@ class CreatecatalogsTable extends Migration
             $table->increments('id');
 			$table->string('catalog_name');
 			$table->integer('catalog_orders');
-			$table->integer('catalog_display');
+			$table->unsignedTinyInteger('catalog_display');
             $table->timestamps();
 			$table->softDeletes();
         });

@@ -42,10 +42,11 @@ class SalesinvoiceController extends Controller
 		$thisYear=date('Y')-1911;
 		$thisMonth=date('m');
 		
+		//未output成csv的才可以
 		if($thisMonth%2==0){//偶數月 看endmonoth
-			$Invoice=Invoice::where('invoice_endmonth',$thisYear.$thisMonth)->get()->sortBy('invoice_startmonth');
+			$Invoice=Invoice::where('invoice_endmonth',$thisYear.$thisMonth)->where('invoice_outputemptynumber',0)->get()->sortBy('invoice_startmonth');
 		}else{//奇數月 看endmonoth
-			$Invoice=Invoice::where('invoice_startmonth',$thisYear.$thisMonth)->get()->sortBy('invoice_startmonth');	
+			$Invoice=Invoice::where('invoice_startmonth',$thisYear.$thisMonth)->where('invoice_outputemptynumber',0)->get()->sortBy('invoice_startmonth');	
 		}
 		$Invoice=$Invoice->filter(function($invoice){//目前號碼不等於發票末碼 才可以取出資料
 			return ($invoice->invoice_endnumber>$invoice->invoice_currentnumber)?$invoice:'';
@@ -109,7 +110,7 @@ class SalesinvoiceController extends Controller
 				
 				$Invoice2=$Invoice2->filter(function($invoice2){//目前號碼不等於發票末碼 才可以取出資料
 					return ($invoice2->invoice_endnumber>$invoice2->invoice_currentnumber)?$invoice2:'';
-				});				
+				});
 				$Invoice2=$Invoice2->first();
 				
 				if($Invoice2){
@@ -230,6 +231,7 @@ class SalesinvoiceController extends Controller
 		$Salesinvoice->salesinvoice_invalidstate=$request->salesinvoice_invalidstate?1:0;
 		$Salesinvoice->salesinvoice_C0401state=$request->salesinvoice_C0401state?1:0;
 		$Salesinvoice->salesinvoice_C0501state=$request->salesinvoice_C0501state?1:0;
+		$Salesinvoice->salesinvoice_isdownload=$request->salesinvoice_isdownload?1:0;
 
 		$salesinvoice_productarray=array();
 		
@@ -255,6 +257,7 @@ class SalesinvoiceController extends Controller
 					"ProductName"=>$ProductNameArray[$i],
 					"ProductQty"=>$ProductQtyArray[$i],
 					"ProductAmount"=>$ProductAmountArray[$i],
+					"ProductSumAmount"=>$ProductQtyArray[$i]*$ProductAmountArray[$i],
 					"TaxType"=>$TaxTypeArray[$i],
 				)
 			);
@@ -294,7 +297,7 @@ class SalesinvoiceController extends Controller
 		$Salesinvoices=Salesinvoice::all()->where("salesinvoice_date",date("Y-m-d"))->where("salesinvoice_C0401state",0);
 		//dd($Salesinvoices);
 		
-		$Parameters=Parameter::all();		
+		$Parameters=Parameter::all();
 		$Parameter_companyIdentifier=$Parameters->where('parameter_code','companyIdentifier')->first()->parameter_value;
 		$companyName=$Parameters->where('parameter_code','companyName')->first()->parameter_value;
 		$uploadC0401Folder=$Parameters->where('parameter_code','uploadC0401Folder')->first()->parameter_value;

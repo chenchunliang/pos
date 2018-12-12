@@ -86,7 +86,7 @@
         <th>品項圖片</th>
         <td align="center">
         <p>已上傳：</p>
-        <img src="{!!$Item->item_image!!}">
+        <img src="{!!$Item->item_image!!}" width="100">
         <p>建議大小：55px*55px</p>
         <label for="input_img" class="form-control" style="width:200px"> <i class="fa fa-cloud-upload"></i>&nbsp;選擇新照片</label>
         <input id="input_img" type="file" accept="image/*">

@@ -18,7 +18,7 @@ class ParameterController extends Controller
     public function index()
     {
         //
-		$Parameters=Parameter::all()->sortBy('parameter_groups',1);
+		$Parameters=Parameter::all();
 		$ParametersDistinct=Parameter::select('parameter_groups')->distinct()->get();
 		//dd($ParametersDistinct);
 		return view('parameter.index',compact('Parameters','ParametersDistinct'));

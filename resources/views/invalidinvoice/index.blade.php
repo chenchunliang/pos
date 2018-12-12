@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th>作廢發票號碼</th>
+      <th>發票開立時間</th>
       <th>作廢發票時間</th>
       <th>作廢發票原因</th>
       <th>功能</th>
@@ -21,6 +22,7 @@
   @foreach($Invalidinvoices as $invalidinvoice)
   <tr>
     <td>{{ $invalidinvoice->salesinvoice->salesinvoice_invoicenumber }}</td>
+    <td>{{ $invalidinvoice->salesinvoice->salesinvoice_date }}<br>{{ $invalidinvoice->salesinvoice->salesinvoice_time }}</td>
     <td>{{ $invalidinvoice->invalidinvoice_invaliddate }}<br>{{ $invalidinvoice->invalidinvoice_invalidtime }}</td>
     <td>{{ $invalidinvoice->invalidinvoice_invalidreason }}</td>
     <th> <a href="{{url('invalidinvoice/'.$invalidinvoice->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>

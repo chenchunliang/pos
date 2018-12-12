@@ -1,30 +1,7 @@
 <?php
-//use Endroid\QrCode\ErrorCorrectionLevel;
-//use Endroid\QrCode\QrCode;
-//use Endroid\QrCode\LabelAlignment;
 use Milon\Barcode\DNS1D;
 use Milon\Barcode\DNS2D;
 use App\Parameter;
-
-/*
-function is_cellphone(){
-	$device='/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|'.
-          'docomo|elaine|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|'.
-          'midp|mini|mmp|mobi|motorola|nokia|palm|panasonic|philips|'.
-          'phone|sagem|sharp|smartphone|sony|symbian|t-mobile|telus|'.
-          'vodafone|wap|webos|wireless|xda|xoom|zte)/i';
-	if (preg_match($device, $_SERVER['HTTP_USER_AGENT']))
-		return true;
-	else return false;
-}
-
-function is_iphone(){
-	$device='/(iphone|ipad|ipaq|ipod)/i';
-	if (preg_match($device, $_SERVER['HTTP_USER_AGENT']))
-		return true;
-	else return false;
-}
-*/
 
 function get_thisweek($day){
 
@@ -62,6 +39,11 @@ function get_thisweek($day){
 		return array($startday,$endday);
 }
 
+function get_before_day($day,$before){
+	$endday=date("Y-m-d",strtotime($day)-60*60*24*$before);
+	return $endday;
+}
+
 function get_number_weekday($datetime){
     $weekday = date('w', strtotime($datetime));
 	$weeklist = array(7, 1, 2, 3, 4, 5, 6);
@@ -79,35 +61,14 @@ function barcodeGenerator($data){
 
 function item_barcodeGenerator($data){//EAN13最後1位是檢查碼，不可以亂輸入
 	$barcode = new DNS1D();
-	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "EAN13",1,1).'" width="120px" height="25px" />';
+	return '<img src="data:image/png;base64,'.$barcode->getBarcodePNG($data, "EAN13",1,1).'" width="120px" height="25px" class="itembarcode" />';
 }
 
 function qrcodeGenerator($data){
 	$qrcode = new DNS2D();
-	return '<img src="data:image/png;base64,'.$qrcode->getBarcodePNG($data,"QRCODE").'" width="70%" />';
+	return '<img src="data:image/png;base64,'.$qrcode->getBarcodePNG($data,"QRCODE").'" width="80%" />';
 }
 
-
-/*
-function qrcodeGenerator($qrCode){
-	
-	$qrCode->setSize(150);
-	
-	// Set advanced options
-	$qrCode->setWriterByName('png');//副檔名
-	$qrCode->setMargin(15);//大小
-	$qrCode->setEncoding('UTF-8');//編碼
-	$qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::LOW);//容錯率
-	$qrCode->setRoundBlockSize(false);
-	
-	// Save it to a file
-	$path='/images/qrcode/qrcode'.rand().'.png';
-	$qrCode->writeFile(public_path().$path);
-	
-	return $path;
-}
-*/
-	
 function aseEncrypt($data){
 	$Parameter_AESkey=Parameter::where('parameter_code','AESkey')->first()->parameter_value;
 	//6F42C5148D45357E77124DC9CD27225A

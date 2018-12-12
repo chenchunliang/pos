@@ -47,27 +47,17 @@
               </a> </div>
           </div>
           <div class="col-lg-4">
-            <div class="panel panel-red">
-              <div class="panel-heading">發票明細表</div>
-              <div class="panel-body">
-                <p>顯示發票開立明細表</p>
-              </div>
-              <a href="{{url('invoice_report')}}">
-              <div class="panel-footer">前往</div>
-              </a> </div>
-          </div>
-          <div class="col-lg-4">
             <div class="panel panel-green">
-              <div class="panel-heading">銷售明細表</div>
+              <div class="panel-heading">銷售報表</div>
               <div class="panel-body">
-                <p>顯示銷售狀況明細表</p>
+                <p>顯示銷售明細、發票明細、匯總表</p>
               </div>
-              <a href="{{url('sale_report')}}">
+              <a href="{{url('report/sales')}}">
               <div class="panel-footer">前往</div>
               </a> </div>
           </div>
           <div class="col-lg-4">
-            <div class="panel panel-default">
+            <div class="panel panel-red">
               <div class="panel-heading">基本參數設定</div>
               <div class="panel-body">
                 <p>編輯營業人、售價類別、其他設定等</p>

@@ -20,7 +20,7 @@
   $i++;
   @endphp
   @endforeach <span style="color:#000FFF;cursor:pointer;" onClick="filter('')">全部顯示</span></p>
-<table width="100%" class="table table-striped table-bordered table-hover" id="table1">
+<table width="100%" class="table table-striped table-bordered table-hover" id="table2">
   <thead>
     <tr>
       <th>參數群組</th>
@@ -37,7 +37,13 @@
     <td>{{ $parameter->parameter_groups }}</td>
     <td>{{ $parameter->parameter_code }}</td>
     <td>{{ $parameter->parameter_title }}</td>
-    <td style="word-break:break-word;">{{ $parameter->parameter_value }}</td>
+    <td style="word-break:break-word;">
+    @if($parameter->parameter_code=="invoiceImage")
+    <img src='{!!$parameter->parameter_value!!}' width='100'>
+    @else
+    {{$parameter->parameter_value }}
+    @endif
+    </td>
     <th> <a href="{{url('parameter/'.$parameter->id.'/edit/')}}" role="button" class="btn btn-warning btn-lg">修改</a>
       <form action="{{url('parameter/'.$parameter->id)}}" method="post" id="parameter_delete_{{$parameter->id}}" class="deletebtn_form">
         {{csrf_field()}}
@@ -54,12 +60,24 @@
 
 @section('customjs')
 <script>
+var table2;
+$(function(){
+var opt={
+	   "oLanguage":{"sUrl":"{{url('js/else/dataTables.zh-tw.txt') }}"},
+       "bJQueryUI":true,
+	   "sPaginationType":"full_numbers",
+	   "order": [ [ 0, 'desc' ],[ 1, 'asc' ]],
+	   "lengthMenu": [ 20 , 40 , 60 ]
+   };
+    table2=$("#table2").dataTable(opt);
+});
+
 function filter(object){
 	if(object){
-	table1.fnFilter(object);
+	table2.fnFilter(object);
 	var data = table1._('tr', {"search": "applied"});
 	}else {
-		table1.fnFilter('');
+		table2.fnFilter('');
 		var data = table1._('tr', {"search": "applied"});	
 	}
 }

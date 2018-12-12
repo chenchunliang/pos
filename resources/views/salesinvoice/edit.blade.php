@@ -25,15 +25,17 @@ input[type=number]{
       <td style="width:25%; text-align:center">{{$Salesinvoice->salesinvoice_date}}<br>
         {{$Salesinvoice->salesinvoice_time}}</td>
     <tr>
-      <th>買方</th>
+      <th><p>買方</p>
+      <p>買方統編</p></th>
       <td style="text-align:center">
       <select name="customer_id" class="form-control">
           @foreach($Customers as $customer)
           <option value="{{$customer->id}}" @if($customer->id==$Salesinvoice->customer_id) selected @endif>{{$customer->customer_name}}</option>
           @endforeach
-      </select></td>
-      <th>買方統編</th>
-      <td style="text-align:center"><input class="form-control" type="text" name="salesinvoice_identifier" value="{{$Salesinvoice->salesinvoice_identifier}}"></td>
+      </select>
+      <input class="form-control" type="text" name="salesinvoice_identifier" value="{{$Salesinvoice->salesinvoice_identifier}}"></td>
+      <th>下載狀態</th>
+      <td style="text-align:center"><input type="checkbox" class="form-control" name="salesinvoice_isdownload" value="1" style="width:20px;margin:0" {{$Salesinvoice->salesinvoice_isdownload?'checked':''}}></td>
     </tr>
     <tr>
       <th>列印狀態：

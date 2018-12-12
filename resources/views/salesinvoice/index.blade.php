@@ -18,7 +18,6 @@
       <th>買方統編</th>
       <th>發票總金額</th>
       <th>狀態</th>
-      <th>備註</th>
       <th>功能</th>
     </tr>
   </thead>
@@ -38,12 +37,12 @@
       <p>總金額：{{ number_format($salesinvoice->salesinvoice_totalamount) }}</p>
     </td>
     <td>
-      <p>列印：{{ $salesinvoice->salesinvoice_printstate?'V':'X' }}</p>
-      <p>上傳開立：{{ $salesinvoice->salesinvoice_C0401state?'V':'X' }}</p>
-      <p>作廢：{{ $salesinvoice->salesinvoice_invalidstate?'V':'X' }}</p>
-      <p>上傳作廢：{{ $salesinvoice->salesinvoice_C0501state?'V':'X' }}</p>
+      <p class="{{ $salesinvoice->salesinvoice_printstate?'font_green':'' }}">列印：{{ $salesinvoice->salesinvoice_printstate?'V':'X' }}</p>
+      <p class="{{ $salesinvoice->salesinvoice_C0401state?'font_green':'' }}">上傳開立：{{ $salesinvoice->salesinvoice_C0401state?'V':'X' }}</p>
+      <p class="{{ $salesinvoice->salesinvoice_invalidstate?'font_green':'' }}">作廢：{{ $salesinvoice->salesinvoice_invalidstate?'V':'X' }}</p>
+      <p class="{{ $salesinvoice->salesinvoice_C0501state?'font_green':'' }}">上傳作廢：{{ $salesinvoice->salesinvoice_C0501state?'V':'X' }}</p>
+      <p class="{{ $salesinvoice->salesinvoice_isdownload?'font_green':'' }}">下載狀態：{{ $salesinvoice->salesinvoice_isdownload?'V':'X' }}</p>
     </td>
-    <td>{{ $salesinvoice->salesinvoice_remark }}</td>
     <th>
     <button type="button" class="btn btn-default btn-lg product_detail" data-toggle="modal" data-target="#myModal" data-sid="{{$salesinvoice->id}}">查看品項明細</button>
       <br>

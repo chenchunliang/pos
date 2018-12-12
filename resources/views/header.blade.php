@@ -93,40 +93,7 @@
                             <a href="{{url('invalidinvoice')}}"><i class="fa fa-dashboard fa-fw"></i>作廢發票管理</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>發票明細表<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{url('invoice_report/today')}}">日結發票明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('invoice_report/week')}}">週結發票明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('invoice_report/month')}}">月結發票明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('invoice_report/custom')}}">自訂發票明細表</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>銷售明細表<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{{url('sale_report/today')}}">日結銷售明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('sale_report/week')}}">週結銷售明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('sale_report/month')}}">月結銷售明細表</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('sale_report/custom')}}">自訂銷售明細表</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="{{url('report/sales')}}"><i class="fa fa-dashboard fa-fw"></i>銷售報表</a>
                         </li>
                         <li>
                             <a href="{{url('parameter')}}"><i class="fa fa-dashboard fa-fw"></i>基本參數設定</a>

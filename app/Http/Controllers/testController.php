@@ -8,11 +8,16 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
-
 class testController extends BaseController
 {
     function index(){
-	$ProductSumAmount=33333;
+		
+		
+		
+/*
+		//printerConnet('',1);
+	
+	$ProductSumAmount=180;
 	$ProductArrays=array(
 	array("ProductCode"=>"00001","ProductName"=>"黑豆","ProductQty"=>"1","ProductSaleAmount"=>"171","ProductTaxAmount"=>"9","ProductAmount"=>"180","ProductSumAmount"=>$ProductSumAmount,"TaxType"=>"TN"),
 	array("ProductCode"=>"00001","ProductName"=>"黑豆2","ProductQty"=>"1","ProductSaleAmount"=>"171","ProductTaxAmount"=>"9","ProductAmount"=>"180","ProductSumAmount"=>$ProductSumAmount,"TaxType"=>"TN"),
@@ -29,7 +34,8 @@ class testController extends BaseController
 	$barcode=$path['barcode'];
 	$qr1=$path['qr1'];
 	$qr2=$path['qr2'];
-	
+	*/
+	                                                                                                             
 	return view('qr',compact('barcode','qr1','qr2','ProductArrays','ProductTotalTXSaleAmount','TotalTaxAmount','ProductTotalTNSaleAmount','ProductTotalAmount'));
 	}
 	

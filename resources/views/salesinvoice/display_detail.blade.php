@@ -25,4 +25,6 @@
       <p>稅額：{{ number_format($Salesinvoice->salesinvoice_taxamount) }}</p>
       <p>總金額：{{ number_format($Salesinvoice->salesinvoice_totalamount) }}</p>
   </div>
+  <p>訂單備註：</p>
+  <p>{{ $Salesinvoice->salesinvoice_remark?$Salesinvoice->salesinvoice_remark:'無' }}</p>
 </div>

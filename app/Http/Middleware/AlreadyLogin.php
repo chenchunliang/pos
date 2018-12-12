@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 
-class RedirectIfAuthenticated
+class AlreadyLogin
 {
     /**
      * Handle an incoming request.
@@ -32,10 +32,9 @@ class RedirectIfAuthenticated
 		if($User){
 			$request->session()->put('user_id', $User->id);
 			$request->session()->put('user_password',$User->user_password);
-		}else{
-            return redirect('/');
-        }
 
+            return redirect('/menu');
+        }
         return $next($request);
     }
 }

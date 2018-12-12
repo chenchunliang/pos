@@ -198,7 +198,7 @@
 </div>
 @endsection
 
-@section('customjs') 
+@section('customjs')
 <script>
 
 {{($Invoice)?"":"noInvoicenumber()"}}
