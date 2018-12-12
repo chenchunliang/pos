@@ -53,13 +53,13 @@
                         {{csrf_field()}}
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="帳號" name="account" type="email" autofocus>
+                                    <input class="form-control" placeholder="帳號" name="account" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="密碼" name="password" type="password" value="">
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="javascript:$('#form1').submit()" class="btn btn-lg btn-success btn-block">登入</a>
+                                <button class="btn btn-lg btn-success btn-block" type="submit">登入</button></a>
                             </fieldset>
                         </form>
                     </div>

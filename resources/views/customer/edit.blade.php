@@ -15,6 +15,14 @@
     </thead>
     <tbody>
       <tr>
+        <th>客戶群組</th>
+        <td align="center"><input type="text" class="form-control" name="customer_group" value="{{$Customer->customer_group}}" list="customer_group">
+          @if($errors->has('customer_group'))
+          <p style="color:red">請至少輸入1個字元</p>
+          @endif
+          </td>
+      </tr>
+      <tr>
         <th>客戶名稱</th>
         <td align="center"><input type="text" class="form-control" name="customer_name" value="{{$Customer->customer_name}}">
           @if($errors->has('customer_name'))
@@ -36,5 +44,11 @@
     <input type="submit" name="submit" class="btn btn-lg" value="儲存">
   </p>
 </form>
+
+<datalist id="customer_group">
+@foreach($customerDistinct as $customer)
+<option>{{$customer->customer_group}}</option>
+@endforeach
+</datalist>
 
 @endsection

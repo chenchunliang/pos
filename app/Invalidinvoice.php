@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Invalidinvoice extends Model
 {
     //
+	use SoftDeletes;
+	
 	protected $dates = ['deleted_at'];
 	protected $fillable = [
 		'invalidinvoice_invaliddate',

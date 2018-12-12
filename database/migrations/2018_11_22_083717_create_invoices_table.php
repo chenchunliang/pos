@@ -21,6 +21,7 @@ class CreateinvoicesTable extends Migration
 			$table->string('invoice_startnumber');
 			$table->string('invoice_endnumber');
 			$table->string('invoice_currentnumber');
+			$table->unsignedTinyInteger('invoice_outputemptynumber');
             $table->timestamps();
 			$table->softDeletes();
         });

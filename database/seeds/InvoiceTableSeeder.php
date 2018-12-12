@@ -21,8 +21,9 @@ class InvoiceTableSeeder extends Seeder
 		$invoice->invoice_wordtrack ="AA";
 		$invoice->invoice_startnumber="11111100";
 		$invoice->invoice_endnumber ="11111199";
-		$invoice->invoice_currentnumber="11111100";
-
+		$invoice->invoice_currentnumber="11111099";
+		$invoice->invoice_outputemptynumber=0;
+		
         $invoice->save();
     }
 }

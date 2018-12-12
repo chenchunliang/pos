@@ -14,7 +14,7 @@ class CustomerTableSeeder extends Seeder
     {
         //
 		$customer = new Customer;
-		
+		$customer->customer_group ="零售";
 		$customer->customer_name ="零售";
 		$customer->customer_identifier ="";
 		$customer->customer_remark ="零售客戶共用";
