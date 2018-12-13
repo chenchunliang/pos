@@ -243,7 +243,7 @@ function emptyInvoiceGenerator($Invoices,$others){
 	foreach($Invoices as $Invoice){
 		$text.=$n.','.$others['companyIdentifier'].','.$others['period'].','
 			  .$Invoice->invoice_wordtrack.','.str_pad($Invoice->invoice_currentnumber+1,8,'0',STR_PAD_LEFT).','.$Invoice->invoice_endnumber.",07\r\n";
-		$Invoice->invoice_emptynumber=1;//有匯出
+		$Invoice->invoice_outputemptynumber=1;//有匯出
         $Invoice->update();
 		
 		$n++;
