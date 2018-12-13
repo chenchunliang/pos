@@ -106,7 +106,7 @@ class InvoiceController extends Controller
 	public function outputEmptyInvoice(){//每偶數月最後1日 晚上23:58:00 定時處理：工作排程器+wget
 
 		$period=(date("Y")-1911).date("m");
-		$Invoices=Invoice::all()->where("invoice_endmonth",$period)->where("invoice_emptynumber",0);
+		$Invoices=Invoice::all()->where("invoice_endmonth",$period)->where("invoice_outputemptynumber",0);
 		$Invoices=$Invoices->filter(function($invoice){//目前號碼不等於發票末碼 才可以取出資料
 			return ($invoice->invoice_endnumber>$invoice->invoice_currentnumber)?$invoice:'';
 		});
