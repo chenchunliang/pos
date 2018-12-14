@@ -13,7 +13,7 @@
     <tr>
       <td align="center">{{ $productArray->ProductName }}</td>
       <td align="center">{{ $productArray->ProductQty }}</td>
-      <td align="center">{{ number_format($productArray->ProductAmount) }}</td>
+      <td align="center">{{ number_format($productArray->ProductAmount,1) }}</td>
     </tr>
     @endforeach
     </tbody>
