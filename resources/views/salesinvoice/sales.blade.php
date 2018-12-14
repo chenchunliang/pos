@@ -77,7 +77,7 @@
       </select>
       </span></th>
     <th>客戶統編</th>
-    <th><input type="text" id="salesinvoice_identifier"  name="salesinvoice_identifier" class="form-control"></th>
+    <th><input type="text" id="salesinvoice_identifier"  name="salesinvoice_identifier" class="form-control" onblur="calculatetotalAmount()"></th>
     <th><input type="text" class="form-control" id="barcode_input_area" placeholder="掃條碼!" style="text-align:center" autofocus></th>
   </tr>
   <tr>
@@ -299,7 +299,7 @@ function checkout_all_item(){//結帳
 			'"ProductName":"'+item_name+'",'+
 			'"ProductQty":"'+qty+'",'+
 			'"ProductAmount":"'+amount+'",'+
-			'"ProductSumAmount":"'+(qty*amount)+'",'+
+			'"ProductSumAmount":"'+Math.round(qty*amount)+'",'+
 			'"TaxType":"'+(taxtype==1?'TN':'TX')+
 			'"},';
 		
@@ -408,7 +408,7 @@ function insertItem(item_id,item_name,item_unit,item_unitprice,item_taxtype){
 			"<input type=\"number\" style=\"width:95%\"class=\"form-control ProductQty\"  data-n=\""+n+"\" onBlur=\"calculatetotalAmount()\" data-taxtype=\""+item_taxtype+"\" data-item_id=\""+item_id+"\"  data-item_name=\""+item_name+"\"value=\"1\">"+
 		"</td>"+
 		"<td style=\"text-align:center;width:19%\">"+
-			"<input type=\"number\" style=\"width:95%\"class=\"form-control ProductAmount\" id=\"ProductAmount_"+n+"\" onBlur=\"calculatetotalAmount()\" value=\""+item_unitprice+"\">"+
+			"<input type=\"number\" style=\"width:95%\"class=\"form-control ProductAmount\" id=\"ProductAmount_"+n+"\" onBlur=\"calculatetotalAmount()\" value=\""+item_unitprice+"\" step=\"0.1\">"+
 		"</td>"+
 	"</tr>";
 	$('#item_list_table tbody').append(string);
@@ -433,6 +433,9 @@ $('#pricetype').change(function() {
 function calculatetotalAmount(){
 	var taxrate=1+{{$Parameter_tax->parameter_value}};
 	
+	var identifier=$('#salesinvoice_identifier').val();
+	
+	
 	var tnsalesamount=0;//免稅銷售額
 	var txamount=0;//應稅總金額
 	var txsalesamount=0;//應稅銷售額
@@ -449,14 +452,14 @@ function calculatetotalAmount(){
 			var amount=$('#ProductAmount_'+i).val();
 			
 			if(taxtype==1){//免稅
-				tnsalesamount+=qty*amount;
+				tnsalesamount+=Math.round(qty*amount);
 			}else if(taxtype==2){//應稅
-				txamount+=qty*amount;//應稅總金額
+				txamount+=Math.round(qty*amount);//應稅總金額
 			}
 			//console.log(taxtype+' '+qty+' '+amount);
     });
 	
-	txsalesamount=Math.round(txamount/taxrate);
+	txsalesamount=identifier?Math.round(txamount/taxrate):txamount;
 	taxamount=txamount-txsalesamount;
 	totalamount=tnsalesamount+txamount;
 	//console.log('tn:'+tnsalesamount+' tx:'+txsalesamount+' tax:'+taxamount+' total:'+totalamount);
