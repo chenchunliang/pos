@@ -98,7 +98,7 @@ function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmoun
 	//-----------------------
 	
 	//--------QRrcode--------
-	$RepresentIdentifier='00000000';//固定
+	$RepresentIdentifier='00000000';//固定值
 	$BuyerIdentifier=$BuyerIdentifier?$BuyerIdentifier:'00000000';
 	
 	$SalesAmount=str_pad(dechex($SalesAmount),8,"0",STR_PAD_LEFT);
