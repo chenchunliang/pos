@@ -146,15 +146,11 @@ function createInvoiceCode($InvoiceNumber,$InvoiceDate,$RandomNumber,$SalesAmoun
 	//echo $qr1_data;
 	
 	$codepath['qr1']=qrcodeGenerator($qr1_data);
-	//$qr1_obj = new QrCode($qr1_data);
-	//$codepath['qr1']=qrcodeGenerator($qr1_obj);
 	
 	$qr2_data="**".$qr2_product_string;
 	//echo $qr2_data;
 	
 	$codepath['qr2']=qrcodeGenerator($qr2_data);
-	//$qr2_obj = new QrCode($qr2_data);
-	//$codepath['qr2']=qrcodeGenerator($qr2_obj);
 		
 	return $codepath;
 	//-----------------------
