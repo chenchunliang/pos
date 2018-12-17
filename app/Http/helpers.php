@@ -71,7 +71,6 @@ function qrcodeGenerator($data){
 
 function aseEncrypt($data){
 	$Parameter_AESkey=Parameter::where('parameter_code','AESkey')->first()->parameter_value;
-	//6F42C5148D45357E77124DC9CD27225A
 	$AESkey =  hex2bin($Parameter_AESkey);//公司取得之AESkey
 	
 	$iv 	= base64_decode("Dt8lyToo17X/XkXaQvihuA==");//財政部固定值
