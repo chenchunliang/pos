@@ -139,7 +139,6 @@ class CatalogController extends Controller
 						$position->position_x = $j;
 						$position->position_y = $i;
 						$position->item_id =$request->position[$i][$j];
-						$position->catalog_id = $catalog_id;
 						$position->update();
 					}else if(empty($request->position_id[$i][$j]) && $request->position[$i][$j]){//insert
 						$position = new Position;

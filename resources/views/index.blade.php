@@ -7,8 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="陳俊良,CCL">
 
+	<meta name="theme-color" content="#009100">
+    <link rel="shortcut icon" href="{{url('favicon.ico')}}"/>
+    <link rel="bookmark" href="{{url('favicon.ico')}}"/>
+    
     <title>現金銷售管理平台</title>
 
     <!-- Bootstrap Core CSS -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\User;
+use App\Jobs\SendReminderEmail;
 
 class IndexController extends Controller
 {
@@ -35,6 +36,9 @@ class IndexController extends Controller
 			$request->session()->put('user_id', $User->id);
 			$request->session()->put('user_password',$User->user_password);
 			
+			
+       		$this->dispatch(new SendReminderEmail($User,'POS系統登入成功'));
+			 
 			//$previous_route=$request->session()->get('previous_route');
 			//dd($previous_route);
 			
@@ -43,16 +47,18 @@ class IndexController extends Controller
 			}else{
 				return redirect('admin/menu');
 			}*/
+						
 			
 			return redirect('menu');
 		}else{
 			$request->session()->forget('user_id');
 			$request->session()->forget('user_password');
 			//$request->session()->forget('previous_route');
-			Session::flash('login_err_message', '輸入錯誤!'); 
+			Session::flash('login_err_message', '輸入錯誤!');
 			return redirect('/');
     	}
     }
+		
 	public function menu(){
 		return view('menu');
 	}
